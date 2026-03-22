@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regino & Kleefer - Wedding Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brown-1': '#B68A65',
+                        'brown-2': '#5E3A1C',
+                        'brown-3': '#E2D4C6',
+                        'brown-4': '#C1A9A2',
+                        'brown-5': '#A98D71',
+                        'bg-light': '#FAF7F2',
+                        'text-main': '#2D2A26'
+                    },
+                    fontFamily: {
+                        'serif': ['"Cormorant Garamond"', 'serif'],
+                        'sans': ['Montserrat', 'sans-serif'],
+                        'script': ['"Great Vibes"', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FAF7F2;
+            color: #2D2A26;
+        }
+
+        /* Subtle Paper Texture */
+        .paper-texture {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .invitation-opened .fade-up {
+            animation: fadeUpAnim 1s ease-out forwards;
+        }
+
+        @keyframes fadeUpAnim {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Staggered animation delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+
+        /* SVG Decorative Leaves Animation */
+        .sway {
+            transform-origin: center;
+            animation: swayAnim 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes swayAnim {
+            from { transform: rotate(-2deg); }
+            to { transform: rotate(2deg); }
+        }
+
+        /* Particle Animations */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(182,138,101,0.4) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: floatUp 15s infinite linear;
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Floating Messages - Y Axis Float */
+        @keyframes floatUpY {
+            0% { transform: translateY(110vh); opacity: 0; }
+            10% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { transform: translateY(-30vh); opacity: 0; }
+        }
+
+        /* Floating Messages - X Axis Sway */
+        @keyframes swayX {
+            0% { transform: translateX(-30px); }
+            100% { transform: translateX(30px); }
+        }
+
+        .message-y-wrapper {
+            position: absolute;
+            bottom: 0; /* Start position adjusted by translateY */
+            animation: floatUpY linear forwards;
+            pointer-events: auto; /* Allows hover/tap */
+            z-index: 6;
+        }
+
+        .message-x-sway {
+            animation: swayX ease-in-out infinite alternate;
+        }
+
+        /* Pause animations on hover/tap to read */
+        .message-y-wrapper:hover, .message-y-wrapper:hover .message-x-sway {
+            animation-play-state: paused !important;
+            z-index: 50; /* Bring to very front */
+        }
+
+        .message-content {
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(226, 212, 198, 0.6);
+            padding: 12px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(94, 58, 28, 0.08);
+            text-align: center;
+            max-width: 200px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        /* Pop out and clear up when hovered */
+        .message-y-wrapper:hover .message-content {
+            transform: scale(1.15) !important;
+            filter: blur(0) !important;
+            opacity: 1 !important;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 30px rgba(94, 58, 28, 0.15);
+        }
+
+        .floating-message-name {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #B68A65;
+            margin-bottom: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .floating-message-text {
+            font-size: 14px;
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            color: #5E3A1C;
+        }
+        
+        /* Individual particle timings and positions */
+        .p1 { left: 10%; width: 12px; height: 12px; animation-duration: 22s; animation-delay: 0s; }
+        .p2 { left: 35%; width: 18px; height: 18px; animation-duration: 26s; animation-delay: 4s; }
+        .p3 { left: 55%; width: 10px; height: 10px; animation-duration: 18s; animation-delay: 2s; }
+        .p4 { left: 75%; width: 15px; height: 15px; animation-duration: 24s; animation-delay: 7s; }
+        .p5 { left: 90%; width: 22px; height: 22px; animation-duration: 29s; animation-delay: 1s; }
+        .p6 { left: 25%; width: 14px; height: 14px; animation-duration: 20s; animation-delay: 11s; }
+        .p7 { left: 65%; width: 9px; height: 9px; animation-duration: 16s; animation-delay: 8s; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-8 font-sans relative overflow-x-hidden paper-texture">
+
+    <!-- Envelope / Cover Screen -->
+    <div id="envelope-cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#E2D4C6] paper-texture transition-transform duration-[1.2s] ease-in-out cursor-pointer" onclick="openInvitation()">
+        <div class="border border-brown-2/20 p-12 md:p-20 rounded-sm flex flex-col items-center justify-center relative bg-white/40 backdrop-blur-md shadow-2xl scale-100 hover:scale-105 transition-transform duration-500">
+            <div class="font-script text-7xl md:text-9xl text-brown-2 mb-6 drop-shadow-sm">R & K</div>
+            <div class="uppercase tracking-[0.3em] text-[10px] md:text-xs font-semibold text-brown-2 animate-pulse border-t border-brown-2/20 pt-6">Tap to Open</div>
+        </div>
+    </div>
+
+    <!-- Magical Floating Particles -->
+    <div class="particles-container">
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        <div class="particle p3"></div>
+        <div class="particle p4"></div>
+        <div class="particle p5"></div>
+        <div class="particle p6"></div>
+        <div class="particle p7"></div>
+    </div>
+
+    <!-- Floating Messages Container -->
+    <div id="floating-messages-container" class="fixed inset-0 pointer-events-none overflow-hidden z-40"></div>
+
+    <!-- Background decorative SVGs (Mimicking Boho Leaves) -->
+    <div id="leaves-top" class="fixed top-0 right-0 w-64 md:w-96 opacity-60 pointer-events-none z-0">
+        <div class="sway" style="transform-origin: top right;">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#E2D4C6" d="M180,-20 Q160,80 80,100 Q140,120 190,70 Z" />
+                <path fill="#C1A9A2" d="M190,-10 Q140,70 50,70 Q120,90 200,40 Z" />
+                <path fill="#B68A65" d="M210,10 Q160,90 90,130 Q170,120 220,60 Z" />
+                <path fill="none" stroke="#A98D71" stroke-width="1.5" d="M180,-20 Q150,80 40,120" />
+                <path fill="none" stroke="#A98D71" stroke-width="1" d="M150,30 L110,60 M130,55 L90,85 M100,80 L70,100" />
+            </svg>
+        </div>
+    </div>
+
+    <div id="leaves-bottom" class="fixed bottom-0 left-0 w-64 md:w-96 opacity-60 pointer-events-none z-0">
+        <div class="sway" style="transform-origin: bottom left; animation-delay: -4s;">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" transform="rotate(180)">
+                <path fill="#E2D4C6" d="M180,-20 Q160,80 80,100 Q140,120 190,70 Z" />
+                <path fill="#C1A9A2" d="M190,-10 Q140,70 50,70 Q120,90 200,40 Z" />
+                <path fill="#B68A65" d="M210,10 Q160,90 90,130 Q170,120 220,60 Z" />
+                <path fill="none" stroke="#A98D71" stroke-width="1.5" d="M180,-20 Q150,80 40,120" />
+                <path fill="none" stroke="#A98D71" stroke-width="1" d="M150,30 L110,60 M130,55 L90,85 M100,80 L70,100" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Main Invitation Card -->
+    <main class="bg-white/95 backdrop-blur-sm max-w-2xl w-full shadow-2xl rounded-sm border border-brown-3 p-8 sm:p-16 relative z-10 text-center mx-auto my-8 paper-texture">
+        
+        <!-- Romantic Quote -->
+        <div class="font-script text-4xl md:text-5xl text-brown-1 mb-6 fade-up delay-100">
+            Welcome to our beginning
+        </div>
+
+        <!-- Header -->
+        <div class="uppercase tracking-[0.2em] text-sm md:text-base text-gray-600 mb-8 fade-up delay-100">
+            <p>You're Invited</p>
+            <p class="mt-2">To the wedding of</p>
+        </div>
+
+        <!-- Names -->
+        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-text-main leading-tight mb-2 fade-up delay-200">
+            REGINO
+        </h1>
+        <div class="font-script text-6xl md:text-8xl text-brown-1 my-2 fade-up delay-300">
+            &
+        </div>
+        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-text-main leading-tight mb-12 fade-up delay-400">
+            KLEEFER
+        </h1>
+
+        <!-- Date & Time -->
+        <div class="uppercase tracking-widest text-xs md:text-sm font-medium mb-8 fade-up delay-500">
+            <p class="mb-2">Tuesday, April 28, 2026</p>
+            <p>At 3 o'clock in the afternoon</p>
+        </div>
+
+        <!-- Location -->
+        <div class="uppercase tracking-widest text-xs md:text-sm font-medium mb-8 fade-up delay-600">
+            <p>Sunn Hotel, Sagay City</p>
+        </div>
+
+        <!-- Map Link -->
+        <div class="mb-12 fade-up delay-600 mx-auto max-w-lg">
+            <a href="https://maps.google.com/?q=Sunn+Hotel,+Sagay+City" target="_blank" class="inline-block text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-brown-1 hover:text-brown-2 transition-colors border-b border-brown-1 pb-1">
+                View on Google Maps
+            </a>
+        </div>
+
+        <!-- Divider -->
+        <div class="w-16 h-px bg-brown-1 mx-auto mb-10 fade-up delay-600"></div>
+
+        <!-- Countdown Timer -->
+        <div class="mb-12 fade-up delay-600">
+            <h2 class="uppercase tracking-widest text-xs font-semibold text-brown-5 mb-6">Counting down the days</h2>
+            <div class="flex justify-center gap-4 sm:gap-8 font-serif text-brown-2">
+                <div class="flex flex-col items-center">
+                    <span id="days" class="text-3xl sm:text-5xl font-semibold">00</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-wider mt-1 font-sans text-gray-500">Days</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span id="hours" class="text-3xl sm:text-5xl font-semibold">00</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-wider mt-1 font-sans text-gray-500">Hrs</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span id="minutes" class="text-3xl sm:text-5xl font-semibold">00</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-wider mt-1 font-sans text-gray-500">Mins</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span id="seconds" class="text-3xl sm:text-5xl font-semibold">00</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-wider mt-1 font-sans text-gray-500">Secs</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dress Code & Palette -->
+        <div class="mb-10 fade-up delay-700 bg-[#FAF7F2] p-6 rounded-sm">
+            <p class="uppercase tracking-[0.15em] text-xs font-semibold mb-2">Dress Code: Formal Attire</p>
+            <p class="uppercase tracking-[0.15em] text-xs text-gray-600 mb-6">Aligned with our palette</p>
+            
+            <p class="uppercase tracking-widest text-xs font-medium border-b border-gray-300 inline-block pb-1 mb-4">Color Palette</p>
+            
+            <!-- Color Swatches -->
+            <div class="flex justify-center gap-3 sm:gap-4 mt-2">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brown-1 shadow-inner" title="#B68A65"></div>
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brown-2 shadow-inner" title="#5E3A1C"></div>
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brown-3 shadow-inner" title="#E2D4C6"></div>
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brown-4 shadow-inner" title="#C1A9A2"></div>
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brown-5 shadow-inner" title="#A98D71"></div>
+            </div>
+        </div>
+
+        <!-- Message Box -->
+        <div class="mb-12 fade-up delay-700 bg-white/60 p-6 sm:p-8 rounded-sm border border-brown-3/50 text-left max-w-md mx-auto">
+            <h3 class="uppercase tracking-widest text-xs font-semibold text-center mb-6 text-brown-2">Leave a Message</h3>
+            
+            <form id="messageForm" class="flex flex-col gap-5">
+                <div>
+                    <input type="text" id="guestName" placeholder="Your Name" required class="w-full bg-transparent border-b border-brown-3 focus:border-brown-1 outline-none py-2 text-sm font-serif transition-colors text-text-main placeholder-gray-500">
+                </div>
+                <div class="relative">
+                    <textarea id="guestMessage" placeholder="Your Message" required maxlength="250" rows="3" class="w-full bg-transparent border-b border-brown-3 focus:border-brown-1 outline-none py-2 text-sm font-serif transition-colors text-text-main resize-none placeholder-gray-500"></textarea>
+                    <div class="text-[10px] text-gray-500 text-right mt-1 tracking-wider"><span id="charCount">0</span> / 250</div>
+                </div>
+                <button type="submit" class="bg-brown-1 text-white uppercase tracking-widest text-[10px] sm:text-xs py-3 px-6 rounded-sm hover:bg-brown-2 transition-colors duration-300 w-full mt-2 shadow-sm">Send Wishes</button>
+            </form>
+            
+            <!-- Success Message (Hidden by default) -->
+            <div id="formSuccess" class="hidden text-center text-brown-1 text-base font-script mt-2">
+                Thank you for your beautiful wishes!
+            </div>
+        </div>
+
+        <!-- Gift Note -->
+        <div class="max-w-md mx-auto fade-up delay-700">
+            <p class="text-[11px] sm:text-xs leading-loose uppercase tracking-wider text-gray-600">
+                With all that we have been truly blessed, your presence and prayers are all we request, however if your desire to give, monetary gift is one we suggest.
+            </p>
+        </div>
+
+    </main>
+
+    <!-- Background Music Player -->
+    <audio id="bgMusic" loop>
+        <!-- Elegant classical wedding placeholder (Pachelbel's Canon in D) -->
+        <source src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Pachelbel_-_Canon_in_D_major.ogg" type="audio/ogg">
+    </audio>
+
+    <button id="musicToggle" class="fixed bottom-6 right-6 w-12 h-12 bg-brown-1 text-white rounded-full shadow-lg flex items-center justify-center z-50 hover:bg-brown-2 transition-all duration-300 hover:scale-105 focus:outline-none" onclick="toggleMusic()" title="Play Music">
+        <!-- Play Icon -->
+        <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 ml-1">
+            <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+        </svg>
+        <!-- Pause Icon -->
+        <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 hidden">
+            <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clip-rule="evenodd" />
+        </svg>
+    </button>
+
+    <!-- Countdown Script -->
+    <script>
+        // Set the date we're counting down to (April 28, 2026, 15:00:00)
+        const countDownDate = new Date("April 28, 2026 15:00:00").getTime();
+
+        // Update the count down every 1 second
+        const x = setInterval(function() {
+
+            // Get today's date and time
+            const now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            const distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the elements
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }, 1000);
+
+        // Envelope & Animation Logic
+        function openInvitation() {
+            const envelope = document.getElementById('envelope-cover');
+            
+            // Slide up the envelope
+            envelope.style.transform = 'translateY(-100vh)';
+            
+            // Trigger fade-up animations on the main content
+            setTimeout(() => {
+                document.body.classList.add('invitation-opened');
+            }, 300);
+
+            // Cleanup envelope from DOM after animation finishes
+            setTimeout(() => {
+                envelope.style.display = 'none';
+            }, 1200);
+
+            // Auto-play music since the user interacted with the page!
+            if (!isPlaying) {
+                toggleMusic();
+            }
+        }
+
+        // Parallax Scrolling Logic
+        window.addEventListener('scroll', function() {
+            const scrolled = window.scrollY;
+            const topLeaves = document.getElementById('leaves-top');
+            const bottomLeaves = document.getElementById('leaves-bottom');
+            
+            // Move top leaves down slightly as you scroll down
+            if (topLeaves) {
+                topLeaves.style.transform = `translateY(${scrolled * 0.35}px)`;
+            }
+            
+            // Move bottom leaves up slightly as you scroll down
+            if (bottomLeaves) {
+                bottomLeaves.style.transform = `translateY(${-scrolled * 0.15}px)`;
+            }
+        });
+
+        // Music Player Script
+        const music = document.getElementById('bgMusic');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            } else {
+                music.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Message Box Logic
+        const messageInput = document.getElementById('guestMessage');
+        const charCount = document.getElementById('charCount');
+        const messageForm = document.getElementById('messageForm');
+        const formSuccess = document.getElementById('formSuccess');
+
+        // Fetch Messages from Google Sheet and float them
+        const sheetID = '1MTHFNxr1C1rQhq0S_fpgdmQvdeiaQRxzZyWtYJTeo8I';
+        const sheetURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
+        let guestMessages = [];
+
+        function loadAndFloatMessages() {
+            fetch(sheetURL)
+                .then(res => res.text())
+                .then(text => {
+                    // Extract JSON from Google Visualization API response
+                    const jsonStr = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
+                    const data = JSON.parse(jsonStr);
+                    
+                    if (data && data.table && data.table.rows) {
+                        data.table.rows.forEach(row => {
+                            // Assuming Column B (index 1) is Name, Column C (index 2) is Message
+                            if (row.c && row.c[1] && row.c[2]) {
+                                const name = row.c[1].v;
+                                const msg = row.c[2].v;
+                                if (name && msg) {
+                                    guestMessages.push({ name: name, message: msg });
+                                }
+                            }
+                        });
+                        
+                        if (guestMessages.length > 0) {
+                            startFloatingMessagesLoop();
+                        }
+                    }
+                })
+                .catch(err => console.error("Could not load messages for floating:", err));
+        }
+
+        function spawnMessage(name, msg, isInstant = false) {
+            const container = document.getElementById('floating-messages-container');
+            if (!container) return;
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'message-y-wrapper';
+            
+            const swayDiv = document.createElement('div');
+            swayDiv.className = 'message-x-sway';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content backdrop-blur-md paper-texture';
+            
+            contentDiv.innerHTML = `
+                <div class="floating-message-name">${name}</div>
+                <div class="floating-message-text">"${msg}"</div>
+            `;
+            
+            // 4. 3D Depth Effect (Random unless instant)
+            const depth = isInstant ? 1 : Math.random(); 
+            const scale = 0.65 + (depth * 0.45); // 0.65 to 1.1 size
+            const blur = (1 - depth) * 2.5; // Up to 2.5px blur for background
+            const opacity = 0.4 + (depth * 0.6); // 0.4 to 1.0 opacity
+            const durationY = isInstant ? 12 : 15 + ((1 - depth) * 15); // Instant is fast, background is slow
+            const durationX = 3 + Math.random() * 4; // Random sway speed
+
+            // 5. Avoid Center on Mobile
+            let leftPos;
+            const isMobile = window.innerWidth < 768;
+            
+            if (isInstant) {
+                // Spawn near center-ish so they see their own message immediately
+                leftPos = isMobile ? 20 + Math.random() * 30 : 40 + Math.random() * 20;
+            } else if (isMobile) {
+                // Edges only on mobile
+                leftPos = Math.random() > 0.5 ? 2 + Math.random() * 15 : 55 + Math.random() * 25;
+            } else {
+                // Anywhere on desktop
+                leftPos = 5 + Math.random() * 75;
+            }
+
+            wrapper.style.left = `${leftPos}%`;
+            wrapper.style.animationDuration = `${durationY}s`;
+            wrapper.style.zIndex = Math.floor(depth * 10) + 10;
+            
+            swayDiv.style.animationDuration = `${durationX}s`;
+            
+            contentDiv.style.transform = `scale(${scale})`;
+            contentDiv.style.filter = `blur(${blur}px)`;
+            contentDiv.style.opacity = opacity;
+
+            swayDiv.appendChild(contentDiv);
+            wrapper.appendChild(swayDiv);
+            container.appendChild(wrapper);
+
+            // Clean up element after animation ends
+            setTimeout(() => {
+                if (wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
+            }, durationY * 1000);
+        }
+
+        function startFloatingMessagesLoop() {
+            // Spawn a floating message every 3.5 seconds
+            setInterval(() => {
+                if (document.body.classList.contains('invitation-opened') && guestMessages.length > 0) {
+                    const randomMsg = guestMessages[Math.floor(Math.random() * guestMessages.length)];
+                    spawnMessage(randomMsg.name, randomMsg.message);
+                }
+            }, 3500);
+        }
+
+        // Initialize fetching
+        loadAndFloatMessages();
+
+        // Update character count live
+        if (messageInput) {
+            messageInput.addEventListener('input', function() {
+                charCount.textContent = this.value.length;
+            });
+        }
+
+        // Handle form submission
+        if (messageForm) {
+            messageForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent page reload
+                
+                const submitBtn = messageForm.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+
+                // Get form values
+                const name = document.getElementById('guestName').value;
+                const message = document.getElementById('guestMessage').value;
+
+                // IMPORTANT: Your Google Apps Script URL is linked here!
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbzyVN199qkSHafwnGS6vID0eLc3a7lwEUxMTnX1ZpAYdECA2zMYr_DkIJ5hXQUXLXnN_Q/exec';
+                
+                // Create data payload
+                const formData = new FormData();
+                formData.append('Name', name);
+                formData.append('Message', message);
+
+                // Send data to Google Sheet
+                fetch(scriptURL, { method: 'POST', body: formData})
+                    .then(response => {
+                        // Hide form and show thank you message
+                        messageForm.style.display = 'none';
+                        formSuccess.classList.remove('hidden');
+                        
+                        // 1. Instant Live Display! Float their message immediately
+                        guestMessages.push({ name: name, message: message });
+                        spawnMessage(name, message, true);
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        alert('Something went wrong. Please try again.');
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
