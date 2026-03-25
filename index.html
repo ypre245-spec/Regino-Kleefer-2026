@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regino & Kleefer - Wedding Invitation</title>
+    <title>Regino & Kleefer - Wedding</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'brown-1': '#B68A65',
-                        'brown-2': '#5E3A1C',
-                        'brown-3': '#E2D4C6',
-                        'brown-4': '#C1A9A2',
-                        'brown-5': '#A98D71',
-                        'bg-light': '#FAF7F2',
-                        'text-main': '#2D2A26'
+                        'modern-dark': '#111111',
+                        'modern-black': '#000000',
+                        'modern-light': '#FAFAFA',
+                        'modern-white': '#FFFFFF',
+                        'modern-accent': '#C5A880', /* Champagne Gold */
+                        'modern-gray': '#737373',
+                        'modern-light-gray': '#E5E5E5'
                     },
                     fontFamily: {
-                        'serif': ['"Cormorant Garamond"', 'serif'],
-                        'sans': ['Montserrat', 'sans-serif'],
-                        'script': ['"Great Vibes"', 'cursive'],
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Inter"', 'sans-serif'],
                     }
                 }
             }
@@ -34,13 +33,8 @@
 
     <style>
         body {
-            background-color: #FAF7F2;
-            color: #2D2A26;
-        }
-
-        /* Subtle Paper Texture */
-        .paper-texture {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            background-color: #FAFAFA;
+            color: #111111;
         }
 
         /* Initial Page Load Animations */
@@ -50,7 +44,7 @@
         }
 
         .invitation-opened .fade-up {
-            animation: fadeUpAnim 1s ease-out forwards;
+            animation: fadeUpAnim 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes fadeUpAnim {
@@ -64,7 +58,7 @@
         .scroll-fade-up {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .scroll-fade-up.is-visible {
             opacity: 1;
@@ -80,44 +74,36 @@
         .delay-600 { animation-delay: 0.6s; }
         .delay-700 { animation-delay: 0.7s; }
 
-        /* SVG Decorative Leaves Animation */
-        .sway {
-            transform-origin: center;
-            animation: swayAnim 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes swayAnim {
-            from { transform: rotate(-2deg); }
-            to { transform: rotate(2deg); }
-        }
-
-        /* Particle Animations */
-        .particles-container {
+        /* Modern Ambient Background Blurs */
+        .ambient-blur {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, rgba(182,138,101,0.4) 0%, rgba(255,255,255,0) 70%);
             border-radius: 50%;
-            animation: floatUp 15s infinite linear;
+            filter: blur(120px);
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+            animation: drift 20s infinite alternate ease-in-out;
         }
         
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+        .blur-1 {
+            width: 40vw; height: 40vw;
+            background: #C5A880; /* Champagne */
+            top: -10%; left: -10%;
+        }
+        
+        .blur-2 {
+            width: 35vw; height: 35vw;
+            background: #e0d5c1; /* Light sand */
+            bottom: -10%; right: -10%;
+            animation-delay: -10s;
         }
 
-        /* Floating Messages - Y Axis Float */
+        @keyframes drift {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(10%, 10%) scale(1.1); }
+        }
+
+        /* Floating Messages - Modernized */
         @keyframes floatUpY {
             0% { transform: translateY(110vh); opacity: 0; }
             10% { opacity: 1; }
@@ -125,89 +111,68 @@
             100% { transform: translateY(-30vh); opacity: 0; }
         }
 
-        /* Floating Messages - X Axis Sway */
         @keyframes swayX {
-            0% { transform: translateX(-30px); }
-            100% { transform: translateX(30px); }
+            0% { transform: translateX(-20px); }
+            100% { transform: translateX(20px); }
         }
 
         .message-y-wrapper {
             position: absolute;
-            bottom: 0; /* Start position adjusted by translateY */
+            bottom: 0;
             animation: floatUpY linear forwards;
-            pointer-events: auto; /* Allows hover/tap */
+            pointer-events: auto;
             z-index: 6;
         }
 
         .message-x-sway {
-            animation: swayX ease-in-out infinite alternate;
+            animation: swayX cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
         }
 
-        /* Pause animations on hover/tap to read */
         .message-y-wrapper:hover, .message-y-wrapper:hover .message-x-sway {
             animation-play-state: paused !important;
-            z-index: 50; /* Bring to very front */
+            z-index: 50;
         }
 
         .message-content {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(182, 138, 101, 0.3);
-            border-top: 3px solid #B68A65; /* Elegant accent line */
-            padding: 20px 24px;
-            border-radius: 4px; /* More paper-like */
-            box-shadow: 0 10px 30px rgba(94, 58, 28, 0.1);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-top: 2px solid #C5A880; 
+            padding: 24px 28px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
             text-align: center;
-            max-width: 260px;
+            max-width: 280px;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-        }
-
-        /* Decorative Quote Mark Watermark */
-        .message-content::before {
-            content: '“';
-            position: absolute;
-            top: -5px;
-            left: 15px;
-            font-size: 50px;
-            color: rgba(182, 138, 101, 0.15);
-            font-family: 'Cormorant Garamond', serif;
-            line-height: 1;
-            pointer-events: none;
         }
 
         .message-y-wrapper:hover .message-content {
-            transform: scale(1.10) !important;
-            filter: blur(0) !important;
-            opacity: 1 !important;
+            transform: scale(1.05) !important;
             background: rgba(255, 255, 255, 1);
-            box-shadow: 0 15px 40px rgba(94, 58, 28, 0.2);
-            border-top: 3px solid #5E3A1C;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+            border-top: 2px solid #111111;
         }
 
         .floating-message-name {
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 10px;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #A98D71;
-            margin-bottom: 8px;
-            font-family: 'Montserrat', sans-serif;
-            position: relative;
-            z-index: 2;
+            letter-spacing: 0.2em;
+            color: #111111;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
         }
 
         .floating-message-text {
-            font-size: 16px;
+            font-size: 15px;
             font-style: italic;
-            font-family: 'Cormorant Garamond', serif;
-            color: #5E3A1C;
-            line-height: 1.5;
-            position: relative;
-            z-index: 2;
+            font-family: 'Playfair Display', serif;
+            color: #444444;
+            line-height: 1.6;
         }
 
-        /* Hide Scrollbar for Overflow Elements */
+        /* Hide Scrollbar */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -216,294 +181,191 @@
             scrollbar-width: none;
         }
         
-        /* Individual particle timings and positions */
-        .p1 { left: 10%; width: 12px; height: 12px; animation-duration: 22s; animation-delay: 0s; }
-        .p2 { left: 35%; width: 18px; height: 18px; animation-duration: 26s; animation-delay: 4s; }
-        .p3 { left: 55%; width: 10px; height: 10px; animation-duration: 18s; animation-delay: 2s; }
-        .p4 { left: 75%; width: 15px; height: 15px; animation-duration: 24s; animation-delay: 7s; }
-        .p5 { left: 90%; width: 22px; height: 22px; animation-duration: 29s; animation-delay: 1s; }
-        .p6 { left: 25%; width: 14px; height: 14px; animation-duration: 20s; animation-delay: 11s; }
-        .p7 { left: 65%; width: 9px; height: 9px; animation-duration: 16s; animation-delay: 8s; }
+        /* Thin Elegant Line Divider */
+        .modern-divider {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, #C5A880, transparent);
+            margin: 0 auto;
+        }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-2 sm:p-8 font-sans relative overflow-x-hidden paper-texture">
+<body class="min-h-screen flex items-center justify-center p-2 sm:p-6 lg:p-12 font-sans relative overflow-x-hidden">
 
     <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#FAF7F2] paper-texture transition-opacity duration-1000">
-        <div class="font-script text-6xl md:text-8xl text-brown-2 animate-pulse mb-4">R & K</div>
-        <div class="uppercase tracking-[0.3em] text-[9px] font-semibold text-brown-5">Loading Details...</div>
+    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-modern-light transition-opacity duration-700">
+        <div class="font-serif text-4xl text-modern-dark animate-pulse mb-6 tracking-widest">R <span class="text-modern-accent font-light">&</span> K</div>
+        <div class="uppercase tracking-[0.4em] text-[8px] font-medium text-modern-gray">Initializing</div>
     </div>
 
-    <!-- Envelope / Cover Screen -->
-    <div id="envelope-cover" class="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-[#FAF7F2] paper-texture transition-opacity duration-1000">
-        <div class="envelope-wrapper relative w-[320px] h-[220px] sm:w-[480px] sm:h-[320px] cursor-pointer shadow-2xl transition-transform duration-[1.2s] ease-in-out" style="perspective: 1200px;" onclick="openInvitation()">
-            
-            <!-- Inside Back -->
-            <div class="absolute inset-0 bg-[#C1A9A2] rounded-sm shadow-inner z-0"></div>
-            
-            <!-- Inner Card -->
-            <div class="inner-card absolute inset-x-3 bottom-1 top-4 bg-white rounded-t-sm flex flex-col items-center pt-8 md:pt-12 border border-brown-3 transition-transform duration-1000 ease-in-out z-10">
-                <div class="font-script text-4xl sm:text-6xl text-brown-1">R & K</div>
-                <div class="uppercase tracking-widest text-[8px] sm:text-[10px] text-brown-4 mt-2 font-semibold">Wedding Invitation</div>
-            </div>
+    <!-- Modern Cinematic Cover -->
+    <div id="modern-cover" class="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-modern-dark text-modern-white transition-transform duration-[1.2s] ease-[cubic-bezier(0.77,0,0.175,1)]">
+        
+        <div class="absolute inset-0 overflow-hidden z-0">
+            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(197,168,128,0.15)_0%,rgba(17,17,17,1)_60%)]"></div>
+        </div>
 
-            <!-- Left Flap -->
-            <div class="absolute inset-0 z-20" style="filter: drop-shadow(2px 0 4px rgba(0,0,0,0.1));">
-                <div class="absolute inset-0 bg-[#D5C5B5] rounded-l-sm" style="clip-path: polygon(0 0, 0 100%, 52% 50%);"></div>
-            </div>
+        <div class="z-10 text-center px-4">
+            <div class="uppercase tracking-[0.4em] text-[9px] text-modern-accent mb-8 font-medium">The Wedding Celebration Of</div>
+            <h1 class="font-serif text-5xl sm:text-7xl md:text-8xl tracking-widest mb-4 font-light">REGINO</h1>
+            <h1 class="font-serif text-5xl sm:text-7xl md:text-8xl tracking-widest mb-16 font-light">KLEEFER</h1>
             
-            <!-- Right Flap -->
-            <div class="absolute inset-0 z-20" style="filter: drop-shadow(-2px 0 4px rgba(0,0,0,0.1));">
-                <div class="absolute inset-0 bg-[#D5C5B5] rounded-r-sm" style="clip-path: polygon(100% 0, 100% 100%, 48% 50%);"></div>
-            </div>
-            
-            <!-- Bottom Flap -->
-            <div class="absolute inset-0 z-30" style="filter: drop-shadow(0 -3px 4px rgba(0,0,0,0.15));">
-                <div class="absolute inset-0 bg-[#E2D4C6] rounded-b-sm" style="clip-path: polygon(0 100%, 100% 100%, 50% 43%);"></div>
-            </div>
-            
-            <!-- Top Flap Wrapper -->
-            <div class="top-flap absolute inset-0 origin-top transition-transform duration-700 ease-in-out z-40" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); transform-style: preserve-3d;">
-                <div class="absolute inset-0 bg-[#E2D4C6] rounded-t-sm" style="clip-path: polygon(0 0, 100% 0, 50% 55%);"></div>
-            </div>
-
-            <!-- Wax Seal Container -->
-            <div class="wax-seal-container absolute inset-0 origin-top transition-transform duration-700 ease-in-out z-50 pointer-events-none">
-                <div class="wax-seal absolute top-[50%] sm:top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-[#8c5a35] to-[#4a2e15] shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(255,255,255,0.2)] flex items-center justify-center text-white/90 font-serif text-2xl border border-[#3d2410] transition-all duration-500">
-                    RK
-                </div>
-            </div>
-
-            <!-- Tap to Open -->
-            <div class="tap-text absolute -bottom-16 left-0 right-0 text-center uppercase tracking-[0.3em] text-[10px] md:text-xs font-semibold text-brown-2 animate-pulse transition-opacity duration-300">Tap to Open</div>
+            <button onclick="openInvitation()" class="group relative inline-flex items-center justify-center px-10 py-4 uppercase tracking-[0.3em] text-[10px] font-medium text-modern-white overflow-hidden transition-all duration-500 border border-modern-white/20 hover:border-modern-accent">
+                <span class="absolute w-0 h-full bg-modern-accent transition-all duration-500 ease-out group-hover:w-full"></span>
+                <span class="relative z-10 group-hover:text-modern-dark transition-colors duration-500">Enter Experience</span>
+            </button>
         </div>
     </div>
 
-    <!-- Magical Floating Particles -->
-    <div class="particles-container">
-        <div class="particle p1"></div>
-        <div class="particle p2"></div>
-        <div class="particle p3"></div>
-        <div class="particle p4"></div>
-        <div class="particle p5"></div>
-        <div class="particle p6"></div>
-        <div class="particle p7"></div>
-    </div>
+    <!-- Ambient Background Blurs -->
+    <div class="ambient-blur blur-1"></div>
+    <div class="ambient-blur blur-2"></div>
 
     <!-- Floating Messages Container -->
     <div id="floating-messages-container" class="fixed inset-0 pointer-events-none overflow-hidden z-40"></div>
 
-    <!-- Background decorative SVGs (Mimicking Boho Leaves) -->
-    <div id="leaves-top" class="fixed top-0 right-0 w-64 md:w-96 opacity-60 pointer-events-none z-0">
-        <div class="sway" style="transform-origin: top right;">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#E2D4C6" d="M180,-20 Q160,80 80,100 Q140,120 190,70 Z" />
-                <path fill="#C1A9A2" d="M190,-10 Q140,70 50,70 Q120,90 200,40 Z" />
-                <path fill="#B68A65" d="M210,10 Q160,90 90,130 Q170,120 220,60 Z" />
-                <path fill="none" stroke="#A98D71" stroke-width="1.5" d="M180,-20 Q150,80 40,120" />
-                <path fill="none" stroke="#A98D71" stroke-width="1" d="M150,30 L110,60 M130,55 L90,85 M100,80 L70,100" />
-            </svg>
-        </div>
-    </div>
-
-    <div id="leaves-bottom" class="fixed bottom-0 left-0 w-64 md:w-96 opacity-60 pointer-events-none z-0">
-        <div class="sway" style="transform-origin: bottom left; animation-delay: -4s;">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" transform="rotate(180)">
-                <path fill="#E2D4C6" d="M180,-20 Q160,80 80,100 Q140,120 190,70 Z" />
-                <path fill="#C1A9A2" d="M190,-10 Q140,70 50,70 Q120,90 200,40 Z" />
-                <path fill="#B68A65" d="M210,10 Q160,90 90,130 Q170,120 220,60 Z" />
-                <path fill="none" stroke="#A98D71" stroke-width="1.5" d="M180,-20 Q150,80 40,120" />
-                <path fill="none" stroke="#A98D71" stroke-width="1" d="M150,30 L110,60 M130,55 L90,85 M100,80 L70,100" />
-            </svg>
-        </div>
-    </div>
-
     <!-- Main Invitation Card -->
-    <!-- Removed extreme paddings on mobile, added overflow-hidden to prevent margin overlaps -->
-    <main class="bg-white/95 backdrop-blur-sm max-w-3xl w-full shadow-[0_20px_60px_rgba(94,58,28,0.12)] rounded-t-[12rem] md:rounded-t-[18rem] rounded-b-md border border-brown-3/40 p-4 sm:p-10 md:p-16 relative z-10 text-center mx-auto my-8 md:my-16 paper-texture outline outline-1 outline-offset-[-8px] md:outline-offset-[-16px] outline-brown-3/40 overflow-hidden">
+    <main class="bg-white/90 backdrop-blur-xl max-w-[900px] w-full shadow-[0_30px_100px_rgba(0,0,0,0.06)] border border-white/40 p-6 sm:p-12 md:p-24 relative z-10 text-center mx-auto my-8 md:my-12">
         
-        <!-- Romantic Quote -->
-        <div class="font-script text-4xl md:text-5xl lg:text-6xl text-brown-1 mb-8 fade-up delay-100 opacity-90">
-            Welcome to our beginning
-        </div>
-
         <!-- Header -->
-        <div class="uppercase tracking-[0.25em] text-[11px] md:text-sm text-gray-500 mb-10 fade-up delay-100 font-semibold">
-            <p>You're Invited</p>
-            <p class="mt-2">To the wedding of</p>
+        <div class="uppercase tracking-[0.4em] text-[9px] md:text-[10px] text-modern-gray mb-16 fade-up delay-100 font-medium">
+            <p>You Are Cordially Invited</p>
         </div>
 
         <!-- Names -->
-        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-text-main leading-tight mb-2 fade-up delay-200 font-light tracking-wide">
+        <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl text-modern-dark leading-tight mb-4 fade-up delay-200 font-normal tracking-wide">
             REGINO
         </h1>
-        <div class="font-script text-6xl md:text-7xl lg:text-8xl text-brown-1/80 my-3 md:my-5 fade-up delay-300">
-            &
+        <div class="font-serif italic text-3xl sm:text-4xl md:text-5xl text-modern-accent my-4 fade-up delay-300 font-light">
+            and
         </div>
-        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-text-main leading-tight mb-14 fade-up delay-400 font-light tracking-wide">
+        <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl text-modern-dark leading-tight mb-16 fade-up delay-400 font-normal tracking-wide">
             KLEEFER
         </h1>
 
-        <!-- Date & Time -->
-        <div class="uppercase tracking-[0.2em] text-xs md:text-sm font-medium mb-6 fade-up delay-500 text-gray-700">
-            <p class="mb-2">Tuesday, April 28, 2026</p>
-            <p>At 3 o'clock in the afternoon</p>
-        </div>
+        <!-- Modern Vertical Divider -->
+        <div class="modern-divider mb-16 fade-up delay-500"></div>
 
-        <!-- Add to Calendar Buttons -->
-        <div class="flex flex-wrap justify-center gap-4 mb-14 fade-up delay-500">
-            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Regino+%26+Kleefer+Wedding&dates=20260428T070000Z/20260428T100000Z&details=We+can't+wait+to+celebrate+with+you!&location=Sunn+Hotel,+Sagay+City" target="_blank" class="border border-brown-1/50 text-brown-2 hover:bg-brown-1 hover:text-white hover:border-brown-1 transition-all hover:-translate-y-0.5 px-5 py-2.5 rounded-sm text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold flex items-center gap-2 shadow-sm hover:shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
-                Google
-            </a>
-            <a href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:20260428T070000Z%0ADTEND:20260428T100000Z%0ASUMMARY:Regino%20%26%20Kleefer%20Wedding%0ALOCATION:Sunn%20Hotel%2C%20Sagay%20City%0ADESCRIPTION:We%20can%27t%20wait%20to%20celebrate%20with%20you!%0AEND:VEVENT%0AEND:VCALENDAR" download="Regino_Kleefer_Wedding.ics" class="border border-brown-1/50 text-brown-2 hover:bg-brown-1 hover:text-white hover:border-brown-1 transition-all hover:-translate-y-0.5 px-5 py-2.5 rounded-sm text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold flex items-center gap-2 shadow-sm hover:shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
-                Apple / ICS
-            </a>
+        <!-- Date & Time -->
+        <div class="uppercase tracking-[0.3em] text-[10px] md:text-xs font-medium mb-10 fade-up delay-500 text-modern-dark leading-loose">
+            <p>Tuesday, April 28, 2026</p>
+            <p class="text-modern-gray mt-2">Three O'clock in the Afternoon</p>
         </div>
 
         <!-- Location -->
-        <div class="uppercase tracking-[0.2em] text-xs md:text-sm font-medium mb-8 fade-up delay-600 text-gray-700">
-            <p>Sunn Hotel, Sagay City</p>
+        <div class="uppercase tracking-[0.3em] text-[10px] md:text-xs font-medium mb-12 fade-up delay-600 text-modern-dark">
+            <p>Sunn Hotel</p>
+            <p class="text-modern-gray mt-2">Sagay City</p>
         </div>
 
-        <!-- Map Link -->
-        <div class="mb-14 fade-up delay-600 mx-auto max-w-lg">
-            <a href="https://maps.google.com/?q=Sunn+Hotel,+Sagay+City" target="_blank" class="inline-block text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-brown-1 hover:text-brown-2 transition-colors border-b border-brown-1/30 hover:border-brown-2 pb-1">
-                View on Google Maps
+        <!-- Action Links (Maps & Calendar) -->
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-24 fade-up delay-600">
+            <a href="https://maps.google.com/?q=Sunn+Hotel,+Sagay+City" target="_blank" class="border-b border-modern-dark pb-1 text-[9px] sm:text-[10px] uppercase tracking-[0.3em] font-semibold text-modern-dark hover:text-modern-accent hover:border-modern-accent transition-colors">
+                View Location
+            </a>
+            <span class="hidden sm:block text-modern-gray/30">•</span>
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Regino+%26+Kleefer+Wedding&dates=20260428T070000Z/20260428T100000Z&details=We+can't+wait+to+celebrate+with+you!&location=Sunn+Hotel,+Sagay+City" target="_blank" class="border-b border-modern-dark pb-1 text-[9px] sm:text-[10px] uppercase tracking-[0.3em] font-semibold text-modern-dark hover:text-modern-accent hover:border-modern-accent transition-colors">
+                Save the Date
             </a>
         </div>
 
-        <!-- Elegant SVG Divider -->
-        <div class="w-full flex justify-center mb-14 fade-up delay-600 text-brown-1 opacity-60">
-            <svg width="180" height="35" viewBox="0 0 120 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Left Branch -->
-                <path d="M50 15 C 35 15, 20 5, 0 15" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-                <path d="M35 15 C 30 10, 25 12, 25 15 C 25 18, 30 20, 35 15" fill="currentColor" opacity="0.6"/>
-                <path d="M20 15 C 15 10, 10 12, 10 15 C 10 18, 15 20, 20 15" fill="currentColor" opacity="0.6"/>
-                <!-- Center Gem -->
-                <rect x="56" y="11" width="8" height="8" transform="rotate(45 60 15)" fill="#5E3A1C"/>
-                <!-- Right Branch -->
-                <path d="M70 15 C 85 15, 100 5, 120 15" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-                <path d="M85 15 C 90 10, 95 12, 95 15 C 95 18, 90 20, 85 15" fill="currentColor" opacity="0.6"/>
-                <path d="M100 15 C 105 10, 110 12, 110 15 C 110 18, 105 20, 100 15" fill="currentColor" opacity="0.6"/>
-            </svg>
-        </div>
-
         <!-- Countdown Timer -->
-        <div class="mb-20 fade-up delay-600">
-            <h2 id="countdown-title" class="uppercase tracking-[0.2em] text-xs font-semibold text-brown-4 mb-8">Counting down the days</h2>
-            <div id="countdown-timer" class="flex justify-center gap-4 sm:gap-12 font-serif text-brown-2">
+        <div class="mb-32 fade-up delay-600">
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-modern-light-gray to-transparent mb-16"></div>
+            
+            <h2 id="countdown-title" class="uppercase tracking-[0.4em] text-[9px] font-medium text-modern-gray mb-12">Time Until 'I Do'</h2>
+            
+            <div id="countdown-timer" class="flex justify-center gap-6 sm:gap-16 font-serif text-modern-dark">
                 <div class="flex flex-col items-center">
-                    <span id="days" class="text-4xl sm:text-6xl font-light">00</span>
-                    <span class="text-[9px] sm:text-[10px] uppercase tracking-widest mt-2 font-sans text-gray-400 font-semibold">Days</span>
+                    <span id="days" class="text-3xl sm:text-5xl font-light">00</span>
+                    <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.3em] mt-4 font-sans text-modern-gray">Days</span>
                 </div>
                 <div class="flex flex-col items-center">
-                    <span id="hours" class="text-4xl sm:text-6xl font-light">00</span>
-                    <span class="text-[9px] sm:text-[10px] uppercase tracking-widest mt-2 font-sans text-gray-400 font-semibold">Hrs</span>
+                    <span id="hours" class="text-3xl sm:text-5xl font-light">00</span>
+                    <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.3em] mt-4 font-sans text-modern-gray">Hours</span>
                 </div>
                 <div class="flex flex-col items-center">
-                    <span id="minutes" class="text-4xl sm:text-6xl font-light">00</span>
-                    <span class="text-[9px] sm:text-[10px] uppercase tracking-widest mt-2 font-sans text-gray-400 font-semibold">Mins</span>
+                    <span id="minutes" class="text-3xl sm:text-5xl font-light">00</span>
+                    <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.3em] mt-4 font-sans text-modern-gray">Mins</span>
                 </div>
                 <div class="flex flex-col items-center">
-                    <span id="seconds" class="text-4xl sm:text-6xl font-light">00</span>
-                    <span class="text-[9px] sm:text-[10px] uppercase tracking-widest mt-2 font-sans text-gray-400 font-semibold">Secs</span>
+                    <span id="seconds" class="text-3xl sm:text-5xl font-light text-modern-accent">00</span>
+                    <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.3em] mt-4 font-sans text-modern-gray">Secs</span>
                 </div>
             </div>
         </div>
 
         <!-- ============================================== -->
-        <!-- NEW SECTION: THE ENTOURAGE -->
+        <!-- THE ENTOURAGE -->
         <!-- ============================================== -->
-        <div class="my-20 sm:my-28 scroll-fade-up">
-            <div class="border-y border-brown-3/40 py-16 px-2 sm:px-8 relative">
-                <!-- Decorative Corners -->
-                <div class="absolute top-4 sm:top-6 left-4 sm:left-6 w-4 sm:w-6 h-4 sm:h-6 border-t border-l border-brown-3/50"></div>
-                <div class="absolute top-4 sm:top-6 right-4 sm:right-6 w-4 sm:w-6 h-4 sm:h-6 border-t border-r border-brown-3/50"></div>
-                <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 w-4 sm:w-6 h-4 sm:h-6 border-b border-l border-brown-3/50"></div>
-                <div class="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 w-4 sm:w-6 h-4 sm:h-6 border-b border-r border-brown-3/50"></div>
-
-                <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-brown-2 mb-4 font-light tracking-wide">THE ENTOURAGE</h2>
-                <p class="uppercase tracking-[0.2em] text-[8px] sm:text-[9px] md:text-[10px] font-bold text-brown-4 mb-20 leading-relaxed">
-                    Kleefer Joy V. Gallenero - Regino O. Miranda Jr.<br>Nuptials
-                </p>
+        <div class="my-32 scroll-fade-up">
+            <div class="border border-modern-light-gray p-8 sm:p-16 relative bg-white">
+                
+                <h2 class="font-serif text-2xl sm:text-3xl tracking-[0.2em] text-modern-dark mb-4 font-normal uppercase">The Entourage</h2>
+                <p class="font-serif italic text-sm text-modern-accent mb-20">Kleefer Joy & Regino Jr.</p>
                 
                 <!-- Parents -->
-                <div class="mb-20">
-                    <h3 class="font-script text-3xl sm:text-4xl text-brown-1 mb-8 opacity-90">The Parents</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="mb-24">
+                    <h3 class="font-sans uppercase tracking-[0.4em] text-[10px] font-medium text-modern-gray mb-10 border-b border-modern-light-gray pb-4 inline-block">The Parents</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-6">
                         <div>
-                            <p class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-brown-4 font-semibold mb-3">Of the Groom</p>
-                            <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light leading-relaxed">Mr. Regino B. Miranda Sr.<br>& Mrs. Ofelia O. Miranda</p>
+                            <p class="text-[8px] uppercase tracking-[0.3em] text-modern-accent font-semibold mb-4">Groom's Parents</p>
+                            <p class="text-modern-dark font-serif text-lg font-light leading-relaxed">Mr. Regino B. Miranda Sr.<br>& Mrs. Ofelia O. Miranda</p>
                         </div>
                         <div>
-                            <p class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-brown-4 font-semibold mb-3">Of the Bride</p>
-                            <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light leading-relaxed">Mr. Rony H. Gallenero<br>& Mrs. Ma. Fe V. Gallenero</p>
+                            <p class="text-[8px] uppercase tracking-[0.3em] text-modern-accent font-semibold mb-4">Bride's Parents</p>
+                            <p class="text-modern-dark font-serif text-lg font-light leading-relaxed">Mr. Rony H. Gallenero<br>& Mrs. Ma. Fe V. Gallenero</p>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Principal Sponsors -->
-                <div class="mb-24 w-full">
-                    <div class="flex items-center justify-center gap-3 sm:gap-6 mb-10">
-                        <div class="h-px w-8 sm:w-20 bg-brown-3/40"></div>
-                        <h3 class="font-script text-3xl sm:text-4xl md:text-5xl text-brown-1 opacity-90">Principal Sponsors</h3>
-                        <div class="h-px w-8 sm:w-20 bg-brown-3/40"></div>
-                    </div>
+                <div class="mb-24">
+                    <h3 class="font-sans uppercase tracking-[0.4em] text-[10px] font-medium text-modern-gray mb-12 border-b border-modern-light-gray pb-4 inline-block">Principal Sponsors</h3>
                     
-                    <div class="bg-white/60 border border-brown-3/20 py-10 px-4 sm:p-12 md:p-16 rounded-sm shadow-[0_4px_25px_rgba(94,58,28,0.02)] w-full overflow-x-auto no-scrollbar">
-                        <div class="grid grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-8 sm:gap-y-14 min-w-max w-full mx-auto text-gray-500 font-serif text-[11px] min-[375px]:text-xs sm:text-sm md:text-base lg:text-lg font-light tracking-wide opacity-90">
-                            
-                            <!-- Pair 1 -->
-                            <div class="text-right leading-relaxed whitespace-nowrap">Hon. Leo Rafael M. Cueva</div>
-                            <div class="text-left leading-relaxed whitespace-nowrap">Mrs. Glenda S. Celo</div>
-                            
-                            <!-- Pair 2 -->
-                            <div class="text-right leading-relaxed whitespace-nowrap">Hon. Roberto Hecita</div>
-                            <div class="text-left leading-relaxed whitespace-nowrap">Mrs. Milagros D. Castillo</div>
-                            
-                            <!-- Pair 3 -->
-                            <div class="text-right leading-relaxed whitespace-nowrap">Mr. Bethoveen Fuetisfina Jr.</div>
-                            <div class="text-left leading-relaxed whitespace-nowrap">Mrs. Jona A. Esmalla</div>
-                            
-                            <!-- Pair 4 -->
-                            <div class="text-right leading-relaxed whitespace-nowrap">Mr. Ronilo Malubay</div>
-                            <div class="text-left leading-relaxed whitespace-nowrap">Mrs. Melanie P. Nemenzo</div>
-                            
-                            <!-- Pair 5 -->
-                            <div class="text-right leading-relaxed whitespace-nowrap">Mr. Alfredo Yu</div>
-                            <div class="text-left leading-relaxed whitespace-nowrap">Mrs. Mape Bonghanoy</div>
-
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10 text-modern-dark font-serif text-sm sm:text-base font-light tracking-wide">
+                        <div class="sm:text-right border-b sm:border-b-0 sm:border-r border-modern-light-gray pb-4 sm:pb-0 sm:pr-6">
+                            <div class="mb-6">Hon. Leo Rafael M. Cueva</div>
+                            <div class="mb-6">Hon. Roberto Hecita</div>
+                            <div class="mb-6">Mr. Bethoveen Fuetisfina Jr.</div>
+                            <div class="mb-6">Mr. Ronilo Malubay</div>
+                            <div>Mr. Alfredo Yu</div>
+                        </div>
+                        <div class="text-left sm:pl-6">
+                            <div class="mb-6">Mrs. Glenda S. Celo</div>
+                            <div class="mb-6">Mrs. Milagros D. Castillo</div>
+                            <div class="mb-6">Mrs. Jona A. Esmalla</div>
+                            <div class="mb-6">Mrs. Melanie P. Nemenzo</div>
+                            <div>Mrs. Mape Bonghanoy</div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Best Man & Maid of Honor -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 mb-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 border-t border-modern-light-gray pt-16">
                     <div>
-                        <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-4 opacity-90">Best Man</h3>
-                        <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Mr. Elmo Yu</p>
+                        <h3 class="font-sans uppercase tracking-[0.4em] text-[9px] font-semibold text-modern-gray mb-6">Best Man</h3>
+                        <p class="text-modern-dark font-serif text-xl font-light">Mr. Elmo Yu</p>
                     </div>
                     <div>
-                        <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-4 opacity-90">Maid of Honor</h3>
-                        <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Ms. Kylah Gallenero</p>
+                        <h3 class="font-sans uppercase tracking-[0.4em] text-[9px] font-semibold text-modern-gray mb-6">Maid of Honor</h3>
+                        <p class="text-modern-dark font-serif text-xl font-light">Ms. Kylah Gallenero</p>
                     </div>
                 </div>
                 
                 <!-- Groomsmen & Bridesmaids -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 mb-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
                     <div>
-                        <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-6 opacity-90">Groomsmen</h3>
-                        <div class="space-y-4 text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">
+                        <h3 class="font-sans uppercase tracking-[0.4em] text-[9px] font-semibold text-modern-gray mb-6">Groomsmen</h3>
+                        <div class="space-y-4 text-modern-dark font-serif text-base font-light">
                             <p>Mr. Hector Dela Serna</p>
                             <p>Mr. Jash Andrew Castillo</p>
                             <p>Mr. Marc Mangulaban</p>
                         </div>
                     </div>
                     <div>
-                        <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-6 opacity-90">Bridesmaids</h3>
-                        <div class="space-y-4 text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">
+                        <h3 class="font-sans uppercase tracking-[0.4em] text-[9px] font-semibold text-modern-gray mb-6">Bridesmaids</h3>
+                        <div class="space-y-4 text-modern-dark font-serif text-base font-light">
                             <p>Ms. Jashiel Ember F. Castillo</p>
                             <p>Ms. Generose Diadio</p>
                             <p>Ms. Princess Allaine Pantoja</p>
@@ -513,53 +375,53 @@
                 
                 <!-- Bridesmate -->
                 <div class="mb-20">
-                    <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-4 opacity-90">Bridesmates</h3>
-                    <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Ms. Regine Decosta & Ms. Judy May Julom</p>
+                    <h3 class="font-sans uppercase tracking-[0.4em] text-[9px] font-semibold text-modern-gray mb-6">Bridesmates</h3>
+                    <p class="text-modern-dark font-serif text-base font-light">Ms. Regine Decosta & Ms. Judy May Julom</p>
                 </div>
                 
                 <!-- Secondary Sponsors -->
-                <div class="mb-20">
-                    <h3 class="font-script text-3xl sm:text-4xl text-brown-1 mb-10 opacity-90">Secondary Sponsors</h3>
-                    <div class="space-y-10">
+                <div class="mb-24 border-t border-modern-light-gray pt-16">
+                    <h3 class="font-sans uppercase tracking-[0.4em] text-[10px] font-medium text-modern-gray mb-12">Secondary Sponsors</h3>
+                    <div class="space-y-12">
                         <div>
-                            <p class="text-[9px] sm:text-[10px] uppercase font-semibold text-brown-4 tracking-[0.2em] mb-2">To Light Our Path</p>
-                            <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Mr. Jessie Cegayle Jr. & Mrs. April Joy Cegayle</p>
+                            <p class="font-serif italic text-modern-accent mb-3">To Light Our Path</p>
+                            <p class="text-modern-dark font-sans tracking-wide text-xs uppercase">Mr. Jessie Cegayle Jr. & Mrs. April Joy Cegayle</p>
                         </div>
                         <div>
-                            <p class="text-[9px] sm:text-[10px] uppercase font-semibold text-brown-4 tracking-[0.2em] mb-2">To Clothe Us As One</p>
-                            <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Atty. Ryan Bonghanoy & Mrs. Ro-an Bonghanoy</p>
+                            <p class="font-serif italic text-modern-accent mb-3">To Clothe Us As One</p>
+                            <p class="text-modern-dark font-sans tracking-wide text-xs uppercase">Atty. Ryan Bonghanoy & Mrs. Ro-an Bonghanoy</p>
                         </div>
                         <div>
-                            <p class="text-[9px] sm:text-[10px] uppercase font-semibold text-brown-4 tracking-[0.2em] mb-2">To Bind Us Together</p>
-                            <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Mr. James Castillo & Mrs. Shiela Mae Castillo</p>
+                            <p class="font-serif italic text-modern-accent mb-3">To Bind Us Together</p>
+                            <p class="text-modern-dark font-sans tracking-wide text-xs uppercase">Mr. James Castillo & Mrs. Shiela Mae Castillo</p>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Bearers & Flower Girls -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 mb-20">
-                    <div class="space-y-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 border-t border-modern-light-gray pt-16">
+                    <div class="space-y-10 text-left md:text-center">
                         <div>
-                            <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-3 opacity-90">Ring Bearer</h3>
-                            <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Jozsef Dominic Bonghanoy</p>
+                            <h3 class="font-sans uppercase tracking-[0.3em] text-[9px] font-semibold text-modern-gray mb-4">Ring Bearer</h3>
+                            <p class="text-modern-dark font-serif text-lg font-light">Jozsef Dominic Bonghanoy</p>
                         </div>
                         <div>
-                            <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-3 opacity-90">Bible Bearer</h3>
-                            <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Zayn Gabrielle Gallenero</p>
+                            <h3 class="font-sans uppercase tracking-[0.3em] text-[9px] font-semibold text-modern-gray mb-4">Bible Bearer</h3>
+                            <p class="text-modern-dark font-serif text-lg font-light">Zayn Gabrielle Gallenero</p>
                         </div>
                         <div>
-                            <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-3 opacity-90">Coin Bearer</h3>
-                            <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Kahil Cavilli Gallenero</p>
+                            <h3 class="font-sans uppercase tracking-[0.3em] text-[9px] font-semibold text-modern-gray mb-4">Coin Bearer</h3>
+                            <p class="text-modern-dark font-serif text-lg font-light">Kahil Cavilli Gallenero</p>
                         </div>
                     </div>
-                    <div class="space-y-10">
+                    <div class="space-y-10 text-left md:text-center border-t md:border-t-0 md:border-l border-modern-light-gray pt-10 md:pt-0">
                         <div>
-                            <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-3 opacity-90">Flower Bell</h3>
-                            <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Sabrina Alleah Gallenero</p>
+                            <h3 class="font-sans uppercase tracking-[0.3em] text-[9px] font-semibold text-modern-gray mb-4">Flower Bell</h3>
+                            <p class="text-modern-dark font-serif text-lg font-light">Sabrina Alleah Gallenero</p>
                         </div>
                         <div>
-                            <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-5 opacity-90">Flower Girls</h3>
-                            <div class="space-y-4 text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">
+                            <h3 class="font-sans uppercase tracking-[0.3em] text-[9px] font-semibold text-modern-gray mb-4">Flower Girls</h3>
+                            <div class="space-y-3 text-modern-dark font-serif text-lg font-light">
                                 <p>Cher Madeleine B. Malubay</p>
                                 <p>Lexynne P. Cegayle</p>
                             </div>
@@ -568,110 +430,122 @@
                 </div>
 
                 <!-- Little Groom & Bride -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 mb-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
                     <div>
-                        <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-3 opacity-90">Little Groom</h3>
-                        <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Jozsef Benedict Bonghanoy</p>
+                        <h3 class="font-sans uppercase tracking-[0.3em] text-[9px] font-semibold text-modern-gray mb-4">Little Groom</h3>
+                        <p class="text-modern-dark font-serif text-lg font-light">Jozsef Benedict Bonghanoy</p>
                     </div>
                     <div>
-                        <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-3 opacity-90">Little Bride</h3>
-                        <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Martina Elish Celo</p>
+                        <h3 class="font-sans uppercase tracking-[0.3em] text-[9px] font-semibold text-modern-gray mb-4">Little Bride</h3>
+                        <p class="text-modern-dark font-serif text-lg font-light">Martina Elish Celo</p>
                     </div>
                 </div>
                 
                 <!-- Officiant -->
-                <div class="mt-8">
-                    <h3 class="font-script text-3xl md:text-4xl text-brown-1 mb-3 opacity-90">Wedding Officiant</h3>
-                    <p class="text-gray-600 font-serif text-base sm:text-lg md:text-xl font-light">Hon. Leo Rafael M. Cueva</p>
+                <div class="mt-16 pt-16 border-t border-modern-light-gray">
+                    <h3 class="font-sans uppercase tracking-[0.3em] text-[9px] font-semibold text-modern-gray mb-4">Officiant</h3>
+                    <p class="text-modern-dark font-serif text-xl font-light">Hon. Leo Rafael M. Cueva</p>
                 </div>
             </div>
         </div>
 
         <!-- ============================================== -->
-        <!-- NEW SECTION: THE DETAILS -->
+        <!-- THE DETAILS -->
         <!-- ============================================== -->
-        <div class="my-28 scroll-fade-up">
-            <h2 class="font-script text-5xl md:text-6xl lg:text-7xl text-brown-2 mb-12 opacity-90">The Details</h2>
+        <div class="my-32 scroll-fade-up">
             
             <!-- Attire Guide -->
-            <div class="bg-gradient-to-b from-[#FAF7F2] to-white p-6 sm:p-8 md:p-12 rounded-sm border border-brown-3/30 shadow-[0_4px_20px_rgba(94,58,28,0.03)] mb-16">
-                <h3 class="font-serif font-light tracking-wide text-2xl md:text-3xl text-brown-2 mb-4 uppercase">ATTIRE GUIDE</h3>
-                <p class="text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 mb-10 leading-loose max-w-lg mx-auto">
-                    We encourage you to dress aligned with our wedding theme and color palette
+            <div class="mb-24">
+                <h2 class="font-serif text-2xl tracking-[0.2em] text-modern-dark mb-6 uppercase">Attire</h2>
+                <p class="text-[10px] uppercase tracking-[0.3em] text-modern-gray mb-12 max-w-lg mx-auto leading-loose">
+                    We request that our guests dress in formal attire, complementing our carefully curated palette.
                 </p>
                 
-                <!-- Color Swatches -->
-                <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mb-12">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brown-1 shadow-inner ring-4 ring-white" title="#B68A65"></div>
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brown-2 shadow-inner ring-4 ring-white" title="#5E3A1C"></div>
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brown-3 shadow-inner ring-4 ring-white" title="#E2D4C6"></div>
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brown-4 shadow-inner ring-4 ring-white" title="#C1A9A2"></div>
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brown-5 shadow-inner ring-4 ring-white" title="#A98D71"></div>
+                <!-- Modern Color Swatches -->
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mb-16">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#B68A65] border border-gray-200 shadow-sm" title="#B68A65"></div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#5E3A1C] border border-gray-200 shadow-sm" title="#5E3A1C"></div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#E2D4C6] border border-gray-200 shadow-sm" title="#E2D4C6"></div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#C1A9A2] border border-gray-200 shadow-sm" title="#C1A9A2"></div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#A98D71] border border-gray-200 shadow-sm" title="#A98D71"></div>
                 </div>
 
                 <!-- Dress Code Breakdowns -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-                    <div class="bg-white/80 p-6 sm:p-8 rounded-sm border border-brown-3/40">
-                        <h4 class="font-script text-3xl md:text-4xl text-brown-1 mb-6 text-center opacity-90">Principal Sponsors<br>& Entourage</h4>
-                        <div class="text-xs md:text-sm text-gray-600 space-y-5 font-medium text-center">
-                            <p><span class="text-brown-4 font-bold uppercase tracking-[0.2em] text-[10px] block mb-1">Ladies</span> Long Gown or Formal Dress</p>
-                            <p class="pt-2"><span class="text-brown-4 font-bold uppercase tracking-[0.2em] text-[10px] block mb-1">Gentlemen</span> Barong and Slacks</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-modern-light-gray border border-modern-light-gray">
+                    <div class="bg-white p-10">
+                        <h4 class="font-sans uppercase tracking-[0.3em] text-[10px] text-modern-dark mb-8 font-semibold">Entourage</h4>
+                        <div class="text-xs text-modern-gray space-y-6">
+                            <div>
+                                <span class="text-modern-accent font-semibold uppercase tracking-[0.2em] block mb-2">Ladies</span> 
+                                <span class="font-serif text-sm">Long Gown or Formal Dress</span>
+                            </div>
+                            <div>
+                                <span class="text-modern-accent font-semibold uppercase tracking-[0.2em] block mb-2">Gentlemen</span> 
+                                <span class="font-serif text-sm">Barong and Slacks</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="bg-white/80 p-6 sm:p-8 rounded-sm border border-brown-3/40">
-                        <h4 class="font-script text-3xl md:text-4xl text-brown-1 mb-6 text-center opacity-90">Wedding Guest</h4>
-                        <div class="text-xs md:text-sm text-gray-600 space-y-5 font-medium text-center">
-                            <p><span class="text-brown-4 font-bold uppercase tracking-[0.2em] text-[10px] block mb-1">Ladies</span> Long Gown or Formal Dress</p>
-                            <p class="pt-2"><span class="text-brown-4 font-bold uppercase tracking-[0.2em] text-[10px] block mb-1">Gentlemen</span> Formal Long-sleeve and Slacks</p>
-                            <p class="mt-6 text-brown-2 font-bold uppercase tracking-[0.25em] border-t border-brown-3/40 pt-6 text-[10px]">Strictly NO SHORTS</p>
+                    <div class="bg-white p-10">
+                        <h4 class="font-sans uppercase tracking-[0.3em] text-[10px] text-modern-dark mb-8 font-semibold">Guests</h4>
+                        <div class="text-xs text-modern-gray space-y-6">
+                            <div>
+                                <span class="text-modern-accent font-semibold uppercase tracking-[0.2em] block mb-2">Ladies</span> 
+                                <span class="font-serif text-sm">Long Gown or Formal Dress</span>
+                            </div>
+                            <div>
+                                <span class="text-modern-accent font-semibold uppercase tracking-[0.2em] block mb-2">Gentlemen</span> 
+                                <span class="font-serif text-sm">Formal Long-sleeve & Slacks</span>
+                            </div>
+                            <div class="pt-4 border-t border-modern-light-gray">
+                                <span class="text-modern-dark font-bold uppercase tracking-[0.2em] text-[9px]">Strictly No Shorts</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Note on Gift -->
-            <div class="mb-16">
-                <h3 class="font-serif font-light tracking-wide text-2xl md:text-3xl text-brown-2 mb-6 uppercase">A Note On Gift</h3>
-                <p class="text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 mb-8 leading-loose max-w-xl mx-auto">
-                    With all that we have, we've been truly blessed. Your presence and prayers are all we suggest.
-                </p>
-                <div class="max-w-xl mx-auto relative px-2">
-                    <p class="text-sm sm:text-base md:text-lg font-serif text-gray-600 font-light italic leading-loose">
-                        But if you honor us with a token of love, a monetary gift would be so much appreciated.<br><br>
-                        However, if you prefer to purchase a gift, feel free to surprise us in your own simple way.
+            <div class="mb-24 py-16 border-y border-modern-light-gray">
+                <h3 class="font-sans uppercase tracking-[0.4em] text-[10px] font-medium text-modern-dark mb-8">A Note On Gifts</h3>
+                <div class="max-w-xl mx-auto px-4">
+                    <p class="text-sm sm:text-base font-serif text-modern-gray font-light leading-relaxed mb-6">
+                        With all that we have, we've been truly blessed. Your presence and prayers are all we suggest.
+                    </p>
+                    <p class="text-sm sm:text-base font-serif text-modern-gray font-light leading-relaxed">
+                        But if you honor us with a token of love, a monetary gift would be so much appreciated. However, if you prefer to purchase a gift, feel free to surprise us in your own simple way.
                     </p>
                 </div>
             </div>
 
             <!-- RSVP -->
-            <div id="rsvp-section" class="border-t border-brown-3/40 pt-16 pb-12 transition-opacity duration-1000">
-                <h3 class="font-serif font-light tracking-wide text-3xl md:text-4xl text-brown-2 mb-6 uppercase">RSVP</h3>
-                <p class="text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 mb-3">We have reserved a seat for you.</p>
-                <p class="text-[10px] md:text-xs uppercase tracking-[0.15em] text-brown-4 mb-8">Kindly confirm, by replying thru Facebook or Messenger</p>
-                <a href="https://www.facebook.com/kleeferjoy.gallenero" target="_blank" class="inline-block bg-gradient-to-r from-[#A98D71] to-[#B68A65] text-white uppercase tracking-[0.2em] text-[10px] sm:text-xs py-3.5 px-10 rounded-sm hover:from-[#8c6b49] hover:to-[#5E3A1C] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 mx-auto font-medium">
-                    Message to RSVP
+            <div id="rsvp-section" class="transition-opacity duration-1000 mb-16">
+                <h3 class="font-serif text-3xl text-modern-dark mb-4 font-normal tracking-wide">RSVP</h3>
+                <p class="text-[10px] font-medium uppercase tracking-[0.3em] text-modern-gray mb-8">Please confirm your attendance</p>
+                
+                <a href="https://www.facebook.com/kleeferjoy.gallenero" target="_blank" class="inline-block bg-modern-dark text-white uppercase tracking-[0.3em] text-[10px] py-4 px-12 hover:bg-modern-accent transition-colors duration-500 font-medium">
+                    Reply via Messenger
                 </a>
             </div>
         </div>
 
         <!-- Message Box -->
-        <div class="mb-6 scroll-fade-up bg-white/70 p-6 sm:p-12 md:p-14 rounded-sm border border-brown-3/40 text-left max-w-lg mx-auto relative z-20 shadow-[0_8px_30px_rgba(94,58,28,0.04)]">
-            <h3 class="uppercase tracking-[0.2em] text-[10px] sm:text-xs font-semibold text-center mb-10 text-brown-2">Leave a Message for the Couple</h3>
+        <div class="scroll-fade-up bg-modern-light p-8 sm:p-16 border border-modern-light-gray text-left max-w-xl mx-auto relative z-20">
+            <h3 class="font-sans uppercase tracking-[0.3em] text-[10px] font-medium text-center mb-12 text-modern-dark">Leave a Message</h3>
             
             <form id="messageForm" class="flex flex-col gap-8">
                 <div>
-                    <input type="text" id="guestName" placeholder="Your Name" required class="w-full bg-transparent border-b border-brown-3/60 focus:border-brown-1 outline-none py-3 text-sm sm:text-base font-serif transition-colors text-text-main placeholder-gray-400">
+                    <input type="text" id="guestName" placeholder="Name" required class="w-full bg-transparent border-b border-modern-gray/30 focus:border-modern-dark outline-none py-3 text-sm font-serif transition-colors text-modern-dark placeholder-modern-gray/50 rounded-none">
                 </div>
                 <div class="relative">
-                    <textarea id="guestMessage" placeholder="Your Message" required maxlength="250" rows="3" class="w-full bg-transparent border-b border-brown-3/60 focus:border-brown-1 outline-none py-3 text-sm sm:text-base font-serif transition-colors text-text-main resize-none placeholder-gray-400"></textarea>
-                    <div class="text-[10px] text-gray-400 text-right mt-2 tracking-wider"><span id="charCount">0</span> / 250</div>
+                    <textarea id="guestMessage" placeholder="Your wishes..." required maxlength="250" rows="3" class="w-full bg-transparent border-b border-modern-gray/30 focus:border-modern-dark outline-none py-3 text-sm font-serif transition-colors text-modern-dark resize-none placeholder-modern-gray/50 rounded-none"></textarea>
+                    <div class="text-[9px] text-modern-gray text-right mt-2 tracking-widest"><span id="charCount">0</span> / 250</div>
                 </div>
-                <button type="submit" class="bg-brown-1/90 text-white uppercase tracking-[0.2em] text-[10px] sm:text-xs py-4 px-6 rounded-sm hover:bg-brown-2 transition-all duration-300 w-full mt-4 shadow-sm hover:shadow-md font-medium">Send Wishes</button>
+                <button type="submit" class="bg-modern-dark text-white uppercase tracking-[0.3em] text-[10px] py-4 px-6 hover:bg-modern-accent transition-colors duration-500 w-full mt-4 font-medium border border-transparent hover:border-modern-accent">Send Message</button>
             </form>
             
-            <!-- Success Message (Hidden by default) -->
-            <div id="formSuccess" class="hidden text-center text-brown-1 text-2xl font-script mt-4">
-                Thank you for your beautiful wishes!
+            <!-- Success Message -->
+            <div id="formSuccess" class="hidden text-center text-modern-dark text-lg font-serif italic mt-8 border-t border-modern-light-gray pt-8">
+                Thank you for your beautiful words.
             </div>
         </div>
 
@@ -679,17 +553,16 @@
 
     <!-- Background Music Player -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="I Do.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <source src="Canon in D.mp3" type="audio/mpeg">
     </audio>
 
-    <button id="musicToggle" class="fixed bottom-6 right-6 w-12 h-12 bg-brown-1 text-white rounded-full shadow-lg flex items-center justify-center z-50 hover:bg-brown-2 transition-all duration-300 hover:scale-105 focus:outline-none" onclick="toggleMusic()" title="Play Music">
+    <button id="musicToggle" class="fixed bottom-6 right-6 w-12 h-12 bg-modern-dark text-white rounded-full flex items-center justify-center z-50 hover:bg-modern-accent transition-colors duration-500 focus:outline-none shadow-lg" onclick="toggleMusic()" title="Play Music">
         <!-- Play Icon -->
-        <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 ml-1">
+        <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 ml-1">
             <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
         </svg>
         <!-- Pause Icon -->
-        <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 hidden">
+        <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 hidden">
             <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clip-rule="evenodd" />
         </svg>
     </button>
@@ -699,16 +572,15 @@
         // Preloader Logic
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
-            // Give it a tiny delay even on fast connections so it feels intentional and smooth
             setTimeout(() => {
                 preloader.style.opacity = '0';
                 setTimeout(() => {
                     preloader.style.display = 'none';
-                }, 1000); // Match CSS duration-1000
+                }, 700); 
             }, 800);
         });
 
-        // Set the date we're counting down to (April 28, 2026, 15:00:00)
+        // Countdown Timer Logic
         const countDownDate = new Date("April 28, 2026 15:00:00").getTime();
 
         const x = setInterval(function() {
@@ -721,7 +593,6 @@
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             if (distance < 0) {
-                // The "Count-Up" (Anniversary Timer)
                 const timeSince = now - countDownDate;
                 
                 const upDays = Math.floor(timeSince / (1000 * 60 * 60 * 24));
@@ -729,20 +600,19 @@
                 const upMinutes = Math.floor((timeSince % (1000 * 60 * 60)) / (1000 * 60));
                 const upSeconds = Math.floor((timeSince % (1000 * 60)) / 1000);
 
-                document.getElementById("countdown-title").innerHTML = "Happily married for";
+                document.getElementById("countdown-title").innerHTML = "Happily Married For";
                 
                 document.getElementById("days").innerHTML = upDays < 10 ? "0" + upDays : upDays;
                 document.getElementById("hours").innerHTML = upHours < 10 ? "0" + upHours : upHours;
                 document.getElementById("minutes").innerHTML = upMinutes < 10 ? "0" + upMinutes : upMinutes;
                 document.getElementById("seconds").innerHTML = upSeconds < 10 ? "0" + upSeconds : upSeconds;
                 
-                // Hide RSVP section
                 const rsvpSection = document.getElementById("rsvp-section");
                 if(rsvpSection && rsvpSection.style.display !== "none") {
                     rsvpSection.style.display = "none";
                 }
             } else {
-                document.getElementById("countdown-title").innerHTML = "Counting down the days";
+                document.getElementById("countdown-title").innerHTML = "Time Until 'I Do'";
                 document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
                 document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
                 document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
@@ -750,15 +620,15 @@
             }
         }, 1000);
 
-        // Scroll Animation Logic using Intersection Observer
+        // Scroll Animation Logic
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    scrollObserver.unobserve(entry.target); // Optional: only animate once
+                    scrollObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+        }, { threshold: 0.1 });
 
         // Envelope & Animation Logic
         let isOpening = false;
@@ -767,69 +637,25 @@
             if (isOpening) return;
             isOpening = true;
 
-            const envelopeCover = document.getElementById('envelope-cover');
-            const envelopeWrapper = document.querySelector('.envelope-wrapper');
-            const topFlap = document.querySelector('.top-flap');
-            const waxSealContainer = document.querySelector('.wax-seal-container');
-            const waxSeal = document.querySelector('.wax-seal');
-            const innerCard = document.querySelector('.inner-card');
-            const tapText = document.querySelector('.tap-text');
+            const modernCover = document.getElementById('modern-cover');
 
-            // 1. Fade out tap text & pop/fade wax seal
-            tapText.style.opacity = '0';
-            waxSeal.style.transform = 'translate(-50%, -50%) scale(1.3)';
-            waxSeal.style.opacity = '0';
-
-            // 2. Open top flap (after seal breaks)
+            // Slide up cinematic cover
+            modernCover.style.transform = 'translateY(-100vh)';
+            
             setTimeout(() => {
-                topFlap.style.transform = 'rotateX(180deg)';
-                waxSealContainer.style.transform = 'rotateX(180deg)';
-                
-                // Adjust z-index mid-flip so the card can slide out IN FRONT of the open flap
-                setTimeout(() => {
-                    topFlap.style.zIndex = '5';
-                    waxSealContainer.style.zIndex = '5';
-                }, 350);
-            }, 400);
-
-            // 3. Slide inner card up slightly out of the envelope
-            setTimeout(() => {
-                innerCard.style.transform = 'translateY(-80px)'; 
-            }, 1000);
-
-            // 4. Zoom in envelope slightly and slide everything down to reveal main page
-            setTimeout(() => {
-                envelopeWrapper.style.transform = 'scale(1.1) translateY(120vh)';
-                envelopeCover.style.backgroundColor = 'transparent';
-                envelopeCover.style.opacity = '0';
-                
                 document.body.classList.add('invitation-opened');
                 
                 document.querySelectorAll('.scroll-fade-up').forEach((el) => {
                     scrollObserver.observe(el);
                 });
 
-                // Auto-play music
                 if (!isPlaying) {
                     toggleMusic();
                 }
-            }, 2200);
-
-            // 5. Cleanup envelope from DOM after animation finishes
-            setTimeout(() => {
-                envelopeCover.style.display = 'none';
-            }, 3500);
+                
+                modernCover.style.display = 'none';
+            }, 1200);
         }
-
-        // Parallax Scrolling Logic
-        window.addEventListener('scroll', function() {
-            const scrolled = window.scrollY;
-            const topLeaves = document.getElementById('leaves-top');
-            const bottomLeaves = document.getElementById('leaves-bottom');
-            
-            if (topLeaves) topLeaves.style.transform = `translateY(${scrolled * 0.35}px)`;
-            if (bottomLeaves) bottomLeaves.style.transform = `translateY(${-scrolled * 0.15}px)`;
-        });
 
         // Music Player Script
         const music = document.getElementById('bgMusic');
@@ -848,10 +674,8 @@
                 pauseIcon.classList.remove('hidden');
                 isPlaying = true;
                 
-                // Adding a tiny delay allows the DOM gesture check to breathe
                 setTimeout(() => {
                     const playPromise = music.play();
-                    
                     if (playPromise !== undefined) {
                         playPromise.catch(error => {
                             console.warn("Audio playback issue:", error);
@@ -870,7 +694,7 @@
         const messageForm = document.getElementById('messageForm');
         const formSuccess = document.getElementById('formSuccess');
 
-        // Fetch Messages from Google Sheet and float them
+        // Fetch Messages from Google Sheet
         const sheetID = '1MTHFNxr1C1rQhq0S_fpgdmQvdeiaQRxzZyWtYJTeo8I';
         const sheetURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
         let guestMessages = [];
@@ -912,7 +736,7 @@
             swayDiv.className = 'message-x-sway';
             
             const contentDiv = document.createElement('div');
-            contentDiv.className = 'message-content backdrop-blur-md paper-texture';
+            contentDiv.className = 'message-content';
             
             contentDiv.innerHTML = `
                 <div class="floating-message-name">${name}</div>
@@ -921,7 +745,6 @@
             
             const depth = isInstant ? 1 : 0.5 + (Math.random() * 0.5); 
             const scale = 0.85 + (depth * 0.25); 
-            const blur = (1 - depth) * 1; 
             const opacity = 0.8 + (depth * 0.2); 
             const durationY = isInstant ? 12 : 15 + ((1 - depth) * 15); 
             const durationX = 3 + Math.random() * 4; 
@@ -944,7 +767,6 @@
             swayDiv.style.animationDuration = `${durationX}s`;
             
             contentDiv.style.transform = `scale(${scale})`;
-            contentDiv.style.filter = `blur(${blur}px)`;
             contentDiv.style.opacity = opacity;
 
             swayDiv.appendChild(contentDiv);
@@ -962,7 +784,7 @@
                     const randomMsg = guestMessages[Math.floor(Math.random() * guestMessages.length)];
                     spawnMessage(randomMsg.name, randomMsg.message);
                 }
-            }, 3500);
+            }, 4000);
         }
 
         loadAndFloatMessages();
