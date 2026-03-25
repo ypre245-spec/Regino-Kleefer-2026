@@ -199,6 +199,12 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-4 sm:p-8 font-sans relative overflow-x-hidden paper-texture">
 
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#FAF7F2] paper-texture transition-opacity duration-1000">
+        <div class="font-script text-6xl md:text-8xl text-brown-2 animate-pulse mb-4">R & K</div>
+        <div class="uppercase tracking-[0.3em] text-[9px] font-semibold text-brown-5">Loading Details...</div>
+    </div>
+
     <!-- Envelope / Cover Screen -->
     <div id="envelope-cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#E2D4C6] paper-texture transition-transform duration-[1.2s] ease-in-out cursor-pointer" onclick="openInvitation()">
         <div class="border border-brown-2/20 p-12 md:p-20 rounded-sm flex flex-col items-center justify-center relative bg-white/40 backdrop-blur-md shadow-2xl scale-100 hover:scale-105 transition-transform duration-500">
@@ -272,9 +278,21 @@
         </h1>
 
         <!-- Date & Time -->
-        <div class="uppercase tracking-widest text-xs md:text-sm font-medium mb-8 fade-up delay-500">
+        <div class="uppercase tracking-widest text-xs md:text-sm font-medium mb-4 fade-up delay-500">
             <p class="mb-2">Tuesday, April 28, 2026</p>
             <p>At 3 o'clock in the afternoon</p>
+        </div>
+
+        <!-- Add to Calendar Buttons -->
+        <div class="flex justify-center gap-3 mb-10 fade-up delay-500">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Regino+%26+Kleefer+Wedding&dates=20260428T070000Z/20260428T100000Z&details=We+can't+wait+to+celebrate+with+you!&location=Sunn+Hotel,+Sagay+City" target="_blank" class="border border-brown-1 text-brown-2 hover:bg-brown-1 hover:text-white transition-colors px-4 py-2 rounded-sm text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold flex items-center gap-1.5 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                Google
+            </a>
+            <a href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:20260428T070000Z%0ADTEND:20260428T100000Z%0ASUMMARY:Regino%20%26%20Kleefer%20Wedding%0ALOCATION:Sunn%20Hotel%2C%20Sagay%20City%0ADESCRIPTION:We%20can%27t%20wait%20to%20celebrate%20with%20you!%0AEND:VEVENT%0AEND:VCALENDAR" download="Regino_Kleefer_Wedding.ics" class="border border-brown-1 text-brown-2 hover:bg-brown-1 hover:text-white transition-colors px-4 py-2 rounded-sm text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold flex items-center gap-1.5 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                Apple / ICS
+            </a>
         </div>
 
         <!-- Location -->
@@ -510,10 +528,13 @@
             </div>
 
             <!-- RSVP -->
-            <div class="border-t border-brown-3 pt-12">
+            <div class="border-t border-brown-3 pt-12 pb-8">
                 <h3 class="font-serif font-bold text-3xl text-brown-2 mb-4 uppercase">RSVP</h3>
                 <p class="text-[10px] md:text-xs font-semibold uppercase tracking-[0.15em] text-gray-600 mb-2">We have reserved a seat for you.</p>
-                <p class="text-[10px] md:text-xs uppercase tracking-widest text-brown-5 mb-8">Kindly confirm, by replying thru Facebook or Messenger</p>
+                <p class="text-[10px] md:text-xs uppercase tracking-widest text-brown-5 mb-6">Kindly confirm, by replying thru Facebook or Messenger</p>
+                <a href="https://www.facebook.com/kleeferjoy.gallenero" target="_blank" class="inline-block bg-brown-1 text-white uppercase tracking-widest text-[10px] sm:text-xs py-3 px-8 rounded-sm hover:bg-brown-2 transition-colors duration-300 shadow-sm mx-auto">
+                    Message to RSVP
+                </a>
             </div>
         </div>
 
@@ -559,6 +580,18 @@
 
     <!-- Scripts -->
     <script>
+        // Preloader Logic
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            // Give it a tiny delay even on fast connections so it feels intentional and smooth
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 1000); // Match CSS duration-1000
+            }, 800);
+        });
+
         // Set the date we're counting down to (April 28, 2026, 15:00:00)
         const countDownDate = new Date("April 28, 2026 15:00:00").getTime();
 
