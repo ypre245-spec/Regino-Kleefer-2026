@@ -542,8 +542,7 @@
 
     <!-- Background Music Player -->
     <audio id="bgMusic" loop preload="auto">
-        <!-- Switched to a universally supported .mp3 format -->
-        <source src="https://ia800300.us.archive.org/33/items/CanonInD_261/Canon_in_D.mp3" type="audio/mpeg">
+        <source src="Canon in D.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -647,24 +646,23 @@
                 pauseIcon.classList.add('hidden');
                 isPlaying = false;
             } else {
-                // Optimistic state update to prevent UI flashing and unhandled double-clicks
-                isPlaying = true; 
                 playIcon.classList.add('hidden');
                 pauseIcon.classList.remove('hidden');
+                isPlaying = true;
                 
-                const playPromise = music.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        // This gracefully catches the AbortError if the play was interrupted
-                        console.warn("Audio playback was interrupted or prevented:", error);
-                        
-                        // Revert the UI state
-                        isPlaying = false;
-                        playIcon.classList.remove('hidden');
-                        pauseIcon.classList.add('hidden');
-                    });
-                }
+                // Adding a tiny delay allows the DOM gesture check to breathe
+                setTimeout(() => {
+                    const playPromise = music.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.warn("Audio playback issue:", error);
+                            isPlaying = false;
+                            playIcon.classList.remove('hidden');
+                            pauseIcon.classList.add('hidden');
+                        });
+                    }
+                }, 50);
             }
         }
 
