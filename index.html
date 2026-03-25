@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -43,7 +43,7 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
         }
 
-        /* Animations */
+        /* Initial Page Load Animations */
         .fade-up {
             opacity: 0;
             transform: translateY(30px);
@@ -58,6 +58,17 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Scroll Reveal Animation */
+        .scroll-fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+        .scroll-fade-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Staggered animation delays */
@@ -139,18 +150,17 @@
         }
 
         .message-content {
-            background: rgba(255, 255, 255, 0.90); /* Increased opacity for readability */
+            background: rgba(255, 255, 255, 0.90);
             border: 1px solid rgba(226, 212, 198, 0.8);
             padding: 16px 20px;
             border-radius: 16px;
-            box-shadow: 0 6px 24px rgba(94, 58, 28, 0.15); /* Stronger shadow */
+            box-shadow: 0 6px 24px rgba(94, 58, 28, 0.15);
             text-align: center;
             max-width: 250px;
             cursor: pointer;
             transition: all 0.4s ease;
         }
 
-        /* Pop out and clear up when hovered */
         .message-y-wrapper:hover .message-content {
             transform: scale(1.10) !important;
             filter: blur(0) !important;
@@ -160,7 +170,7 @@
         }
 
         .floating-message-name {
-            font-size: 12px; /* Increased from 10px */
+            font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -170,7 +180,7 @@
         }
 
         .floating-message-text {
-            font-size: 16px; /* Increased from 14px */
+            font-size: 16px;
             font-style: italic;
             font-family: 'Cormorant Garamond', serif;
             color: #5E3A1C;
@@ -237,7 +247,7 @@
     </div>
 
     <!-- Main Invitation Card -->
-    <main class="bg-white/95 backdrop-blur-sm max-w-2xl w-full shadow-2xl rounded-sm border border-brown-3 p-8 sm:p-16 relative z-10 text-center mx-auto my-8 paper-texture">
+    <main class="bg-white/95 backdrop-blur-sm max-w-2xl w-full shadow-2xl rounded-sm border border-brown-3 p-8 sm:p-12 md:p-16 relative z-10 text-center mx-auto my-8 paper-texture">
         
         <!-- Romantic Quote -->
         <div class="font-script text-4xl md:text-5xl text-brown-1 mb-6 fade-up delay-100">
@@ -283,7 +293,7 @@
         <div class="w-16 h-px bg-brown-1 mx-auto mb-10 fade-up delay-600"></div>
 
         <!-- Countdown Timer -->
-        <div class="mb-12 fade-up delay-600">
+        <div class="mb-16 fade-up delay-600">
             <h2 class="uppercase tracking-widest text-xs font-semibold text-brown-5 mb-6">Counting down the days</h2>
             <div class="flex justify-center gap-4 sm:gap-8 font-serif text-brown-2">
                 <div class="flex flex-col items-center">
@@ -305,26 +315,211 @@
             </div>
         </div>
 
-        <!-- Dress Code & Palette -->
-        <div class="mb-10 fade-up delay-700 bg-[#FAF7F2] p-6 rounded-sm">
-            <p class="uppercase tracking-[0.15em] text-xs font-semibold mb-2">Dress Code: Formal Attire</p>
-            <p class="uppercase tracking-[0.15em] text-xs text-gray-600 mb-6">Aligned with our palette</p>
+        <!-- ============================================== -->
+        <!-- NEW SECTION: THE ENTOURAGE -->
+        <!-- ============================================== -->
+        <div class="my-20 scroll-fade-up">
+            <div class="border-y border-brown-3 py-16 px-4">
+                <h2 class="font-serif text-4xl md:text-5xl text-brown-2 mb-3">THE ENTOURAGE</h2>
+                <p class="uppercase tracking-widest text-[9px] md:text-[10px] font-bold text-brown-5 mb-16 leading-relaxed">
+                    Kleefer Joy V. Gallenero - Regino O. Miranda Jr.<br>Nuptials
+                </p>
+                
+                <!-- Parents -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+                    <div>
+                        <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-3">Parents of the Groom</h3>
+                        <p class="text-sm text-gray-700 font-medium">Mr. Regino B. Miranda Sr.</p>
+                        <p class="text-sm text-gray-700 font-medium mt-1">Mrs. Ofelia O. Miranda</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-3">Parents of the Bride</h3>
+                        <p class="text-sm text-gray-700 font-medium">Mr. Rony H. Gallenero</p>
+                        <p class="text-sm text-gray-700 font-medium mt-1">Mrs. Ma. Fe V. Gallenero</p>
+                    </div>
+                </div>
+                
+                <!-- Principal Sponsors -->
+                <div class="mb-12">
+                    <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-6">Principal Sponsors</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 text-sm text-gray-700 font-medium">
+                        <div>Hon. Leo Rafael M. Cueva</div><div>Mrs. Glenda S. Celo</div>
+                        <div>Hon. Roberto Hecita</div><div>Mrs. Milagros D. Castillo</div>
+                        <div>Mr. Bethoveen Fuetisfina Jr.</div><div>Mrs. Jona A. Esmalla</div>
+                        <div>Mr. Ronilo Malubay</div><div>Mrs. Melanie P. Nemenzo</div>
+                        <div>Mr. Alfredo Yu</div><div>Mrs. Mape Bonghanoy</div>
+                    </div>
+                </div>
+                
+                <!-- Best Man & Maid of Honor -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+                    <div>
+                        <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-3">Best Man</h3>
+                        <p class="text-sm text-gray-700 font-medium">Mr. Elmo Yu</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-3">Maid of Honor</h3>
+                        <p class="text-sm text-gray-700 font-medium">Ms. Kylah Gallenero</p>
+                    </div>
+                </div>
+                
+                <!-- Groomsmen & Bridesmaids -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+                    <div>
+                        <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-4">Groomsmen</h3>
+                        <p class="text-sm text-gray-700 font-medium mb-2">Mr. Hector Dela Serna</p>
+                        <p class="text-sm text-gray-700 font-medium mb-2">Mr. Jash Andrew Castillo</p>
+                        <p class="text-sm text-gray-700 font-medium mb-2">Mr. Marc Mangulaban</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-4">Bridesmaid</h3>
+                        <p class="text-sm text-gray-700 font-medium mb-2">Ms. Jashiel Ember F. Castillo</p>
+                        <p class="text-sm text-gray-700 font-medium mb-2">Ms. Generose Diadio</p>
+                        <p class="text-sm text-gray-700 font-medium mb-2">Ms. Princess Allaine Pantoja</p>
+                    </div>
+                </div>
+                
+                <!-- Bridesmate -->
+                <div class="mb-12">
+                    <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-3">Bridesmate</h3>
+                    <p class="text-sm text-gray-700 font-medium">Ms. Regine Decosta & Ms. Judy May Julom</p>
+                </div>
+                
+                <!-- Secondary Sponsors -->
+                <div class="mb-12">
+                    <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-6">Secondary Sponsors</h3>
+                    <div class="space-y-5">
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-brown-5 tracking-widest mb-1">To Light Our Path</p>
+                            <p class="text-sm text-gray-700 font-medium">Mr. Jessie Cegayle Jr. & Mrs. April Joy Cegayle</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-brown-5 tracking-widest mb-1">To Clothe Us As One</p>
+                            <p class="text-sm text-gray-700 font-medium">Atty. Ryan Bonghanoy & Mrs. Ro-an Bonghanoy</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-brown-5 tracking-widest mb-1">To Bind Us Together</p>
+                            <p class="text-sm text-gray-700 font-medium">Mr. James Castillo & Mrs. Shiela Mae Castillo</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bearers & Flower Girls -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-2">Ring Bearer</h3>
+                            <p class="text-sm text-gray-700 font-medium">Jozsef Dominic Bonghanoy</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-2">Bible Bearer</h3>
+                            <p class="text-sm text-gray-700 font-medium">Zayn Gabrielle Gallenero</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-2">Coin Bearer</h3>
+                            <p class="text-sm text-gray-700 font-medium">Kahil Cavilli Gallnero</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-2">Flower Bell</h3>
+                            <p class="text-sm text-gray-700 font-medium">Sabrina Alleah Gallenero</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-2">Flower Girls</h3>
+                            <p class="text-sm text-gray-700 font-medium mb-1">Cher Madeleine B. Malubay</p>
+                            <p class="text-sm text-gray-700 font-medium">Lexynne P. Cegayle</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Little Groom & Bride -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+                    <div>
+                        <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-2">Little Groom</h3>
+                        <p class="text-sm text-gray-700 font-medium">Jozsef Benedict Bonghanoy</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-2">Little Bride</h3>
+                        <p class="text-sm text-gray-700 font-medium">Martina Elish Celo</p>
+                    </div>
+                </div>
+                
+                <!-- Officiant -->
+                <div>
+                    <h3 class="font-bold text-brown-2 text-xs uppercase tracking-widest mb-2">Wedding Officiant</h3>
+                    <p class="text-sm text-gray-700 font-medium">Hon. Leo Rafael M. Cueva</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- NEW SECTION: THE DETAILS -->
+        <!-- ============================================== -->
+        <div class="my-20 scroll-fade-up">
+            <h2 class="font-script text-5xl md:text-6xl text-brown-2 mb-10">The Details</h2>
             
-            <p class="uppercase tracking-widest text-xs font-medium border-b border-gray-300 inline-block pb-1 mb-4">Color Palette</p>
-            
-            <!-- Color Swatches -->
-            <div class="flex justify-center gap-3 sm:gap-4 mt-2">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brown-1 shadow-inner" title="#B68A65"></div>
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brown-2 shadow-inner" title="#5E3A1C"></div>
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brown-3 shadow-inner" title="#E2D4C6"></div>
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brown-4 shadow-inner" title="#C1A9A2"></div>
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brown-5 shadow-inner" title="#A98D71"></div>
+            <!-- Attire Guide -->
+            <div class="bg-[#FAF7F2] p-6 md:p-10 rounded-sm border border-brown-3/50 shadow-sm mb-12">
+                <h3 class="font-serif font-bold text-2xl md:text-3xl text-brown-2 mb-4 uppercase">ATTIRE GUIDE</h3>
+                <p class="text-[10px] md:text-xs font-semibold uppercase tracking-[0.15em] text-gray-600 mb-6 leading-loose">
+                    We encourage you to dress aligned with our wedding theme and color palette
+                </p>
+                
+                <!-- Color Swatches -->
+                <div class="flex justify-center gap-3 sm:gap-4 mb-10">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brown-1 shadow-inner" title="#B68A65"></div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brown-2 shadow-inner" title="#5E3A1C"></div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brown-3 shadow-inner" title="#E2D4C6"></div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brown-4 shadow-inner" title="#C1A9A2"></div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brown-5 shadow-inner" title="#A98D71"></div>
+                </div>
+
+                <!-- Dress Code Breakdowns -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    <div class="bg-white/60 p-6 rounded-sm border border-brown-3">
+                        <h4 class="font-script text-3xl md:text-4xl text-brown-1 mb-4 text-center">Principal Sponsors<br>& Entourage</h4>
+                        <div class="text-xs md:text-sm text-gray-700 space-y-3 font-medium text-center">
+                            <p><span class="text-brown-2 font-bold uppercase tracking-widest text-[10px] block mb-1">Ladies</span> Long Gown or Formal Dress</p>
+                            <p class="pt-2"><span class="text-brown-2 font-bold uppercase tracking-widest text-[10px] block mb-1">Gentlemen</span> Barong and Slacks</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/60 p-6 rounded-sm border border-brown-3">
+                        <h4 class="font-script text-3xl md:text-4xl text-brown-1 mb-4 text-center">Wedding Guest</h4>
+                        <div class="text-xs md:text-sm text-gray-700 space-y-3 font-medium text-center">
+                            <p><span class="text-brown-2 font-bold uppercase tracking-widest text-[10px] block mb-1">Ladies</span> Long Gown or Formal Dress</p>
+                            <p class="pt-2"><span class="text-brown-2 font-bold uppercase tracking-widest text-[10px] block mb-1">Gentlemen</span> Formal Long-sleeve and Slacks</p>
+                            <p class="mt-4 text-brown-2 font-bold uppercase tracking-widest border-t border-brown-3/50 pt-4">Strictly NO SHORTS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Note on Gift -->
+            <div class="mb-12">
+                <h3 class="font-serif font-bold text-2xl md:text-3xl text-brown-2 mb-4 uppercase">A Note On Gift</h3>
+                <p class="text-[10px] md:text-xs font-semibold uppercase tracking-[0.15em] text-gray-600 mb-6 leading-loose">
+                    The presence of our family and friends is the greatest gift of all.
+                </p>
+                <div class="max-w-md mx-auto">
+                    <p class="text-sm font-serif text-gray-700 italic leading-relaxed">
+                        If you honor us with a token of love, a monetary gift would be so much appreciated.<br><br>
+                        However, if you prefer to purchase a gift, feel free to surprise us in your own way.
+                    </p>
+                </div>
+            </div>
+
+            <!-- RSVP -->
+            <div class="border-t border-brown-3 pt-12">
+                <h3 class="font-serif font-bold text-3xl text-brown-2 mb-4 uppercase">RSVP</h3>
+                <p class="text-[10px] md:text-xs font-semibold uppercase tracking-[0.15em] text-gray-600 mb-2">We have reserved a seat for you.</p>
+                <p class="text-[10px] md:text-xs uppercase tracking-widest text-brown-5 mb-8">Kindly confirm, by replying thru Facebook or Messenger</p>
             </div>
         </div>
 
         <!-- Message Box -->
-        <div class="mb-12 fade-up delay-700 bg-white/60 p-6 sm:p-8 rounded-sm border border-brown-3/50 text-left max-w-md mx-auto">
-            <h3 class="uppercase tracking-widest text-xs font-semibold text-center mb-6 text-brown-2">Leave a Message</h3>
+        <div class="mb-6 scroll-fade-up bg-white/60 p-6 sm:p-8 rounded-sm border border-brown-3/50 text-left max-w-md mx-auto relative z-20">
+            <h3 class="uppercase tracking-widest text-xs font-semibold text-center mb-6 text-brown-2">Leave a Message for the Couple</h3>
             
             <form id="messageForm" class="flex flex-col gap-5">
                 <div>
@@ -343,19 +538,13 @@
             </div>
         </div>
 
-        <!-- Gift Note -->
-        <div class="max-w-md mx-auto fade-up delay-700">
-            <p class="text-[11px] sm:text-xs leading-loose uppercase tracking-wider text-gray-600">
-                With all that we have been truly blessed, your presence and prayers are all we request, however if your desire to give, monetary gift is one we suggest.
-            </p>
-        </div>
-
     </main>
 
     <!-- Background Music Player -->
-    <audio id="bgMusic" loop>
-        <!-- Elegant classical wedding placeholder (Pachelbel's Canon in D) -->
-        <source src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Pachelbel_-_Canon_in_D_major.ogg" type="audio/ogg">
+    <audio id="bgMusic" loop preload="auto">
+        <!-- Switched to a universally supported .mp3 format -->
+        <source src="https://ia800300.us.archive.org/33/items/CanonInD_261/Canon_in_D.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
 
     <button id="musicToggle" class="fixed bottom-6 right-6 w-12 h-12 bg-brown-1 text-white rounded-full shadow-lg flex items-center justify-center z-50 hover:bg-brown-2 transition-all duration-300 hover:scale-105 focus:outline-none" onclick="toggleMusic()" title="Play Music">
@@ -369,33 +558,25 @@
         </svg>
     </button>
 
-    <!-- Countdown Script -->
+    <!-- Scripts -->
     <script>
         // Set the date we're counting down to (April 28, 2026, 15:00:00)
         const countDownDate = new Date("April 28, 2026 15:00:00").getTime();
 
-        // Update the count down every 1 second
         const x = setInterval(function() {
-
-            // Get today's date and time
             const now = new Date().getTime();
-
-            // Find the distance between now and the count down date
             const distance = countDownDate - now;
 
-            // Time calculations for days, hours, minutes and seconds
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Display the result in the elements
             document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
             document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
             document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
             document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
 
-            // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(x);
                 document.getElementById("days").innerHTML = "00";
@@ -405,6 +586,16 @@
             }
         }, 1000);
 
+        // Scroll Animation Logic using Intersection Observer
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    scrollObserver.unobserve(entry.target); // Optional: only animate once
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
         // Envelope & Animation Logic
         function openInvitation() {
             const envelope = document.getElementById('envelope-cover');
@@ -412,9 +603,14 @@
             // Slide up the envelope
             envelope.style.transform = 'translateY(-100vh)';
             
-            // Trigger fade-up animations on the main content
+            // Trigger initial fade-up animations on the top content
             setTimeout(() => {
                 document.body.classList.add('invitation-opened');
+                
+                // Start observing scroll elements *after* the envelope opens
+                document.querySelectorAll('.scroll-fade-up').forEach((el) => {
+                    scrollObserver.observe(el);
+                });
             }, 300);
 
             // Cleanup envelope from DOM after animation finishes
@@ -434,15 +630,8 @@
             const topLeaves = document.getElementById('leaves-top');
             const bottomLeaves = document.getElementById('leaves-bottom');
             
-            // Move top leaves down slightly as you scroll down
-            if (topLeaves) {
-                topLeaves.style.transform = `translateY(${scrolled * 0.35}px)`;
-            }
-            
-            // Move bottom leaves up slightly as you scroll down
-            if (bottomLeaves) {
-                bottomLeaves.style.transform = `translateY(${-scrolled * 0.15}px)`;
-            }
+            if (topLeaves) topLeaves.style.transform = `translateY(${scrolled * 0.35}px)`;
+            if (bottomLeaves) bottomLeaves.style.transform = `translateY(${-scrolled * 0.15}px)`;
         });
 
         // Music Player Script
@@ -456,12 +645,27 @@
                 music.pause();
                 playIcon.classList.remove('hidden');
                 pauseIcon.classList.add('hidden');
+                isPlaying = false;
             } else {
-                music.play();
+                // Optimistic state update to prevent UI flashing and unhandled double-clicks
+                isPlaying = true; 
                 playIcon.classList.add('hidden');
                 pauseIcon.classList.remove('hidden');
+                
+                const playPromise = music.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        // This gracefully catches the AbortError if the play was interrupted
+                        console.warn("Audio playback was interrupted or prevented:", error);
+                        
+                        // Revert the UI state
+                        isPlaying = false;
+                        playIcon.classList.remove('hidden');
+                        pauseIcon.classList.add('hidden');
+                    });
+                }
             }
-            isPlaying = !isPlaying;
         }
 
         // Message Box Logic
@@ -479,13 +683,11 @@
             fetch(sheetURL)
                 .then(res => res.text())
                 .then(text => {
-                    // Extract JSON from Google Visualization API response
                     const jsonStr = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
                     const data = JSON.parse(jsonStr);
                     
                     if (data && data.table && data.table.rows) {
                         data.table.rows.forEach(row => {
-                            // Assuming Column B (index 1) is Name, Column C (index 2) is Message
                             if (row.c && row.c[1] && row.c[2]) {
                                 const name = row.c[1].v;
                                 const msg = row.c[2].v;
@@ -521,26 +723,21 @@
                 <div class="floating-message-text">"${msg}"</div>
             `;
             
-            // 4. 3D Depth Effect (Less aggressive depth for better readability)
-            const depth = isInstant ? 1 : 0.5 + (Math.random() * 0.5); // 0.5 to 1.0 (prevents being too tiny)
-            const scale = 0.85 + (depth * 0.25); // 0.85 to 1.1 size
-            const blur = (1 - depth) * 1; // Max 0.5px blur so text remains legible
-            const opacity = 0.8 + (depth * 0.2); // 0.8 to 1.0 opacity
-            const durationY = isInstant ? 12 : 15 + ((1 - depth) * 15); // Instant is fast, background is slow
-            const durationX = 3 + Math.random() * 4; // Random sway speed
+            const depth = isInstant ? 1 : 0.5 + (Math.random() * 0.5); 
+            const scale = 0.85 + (depth * 0.25); 
+            const blur = (1 - depth) * 1; 
+            const opacity = 0.8 + (depth * 0.2); 
+            const durationY = isInstant ? 12 : 15 + ((1 - depth) * 15); 
+            const durationX = 3 + Math.random() * 4; 
 
-            // 5. Avoid Center on Mobile - Improved horizontal clamping
             let leftPos;
             const isMobile = window.innerWidth < 768;
             
             if (isInstant) {
-                // Spawn near center-ish so they see their own message immediately
                 leftPos = isMobile ? 10 + Math.random() * 40 : 40 + Math.random() * 20;
             } else if (isMobile) {
-                // Keep strictly within view width to avoid cut-offs on mobile
                 leftPos = Math.random() > 0.5 ? 2 + Math.random() * 10 : 40 + Math.random() * 15;
             } else {
-                // Anywhere on desktop
                 leftPos = 5 + Math.random() * 70;
             }
 
@@ -558,14 +755,12 @@
             wrapper.appendChild(swayDiv);
             container.appendChild(wrapper);
 
-            // Clean up element after animation ends
             setTimeout(() => {
                 if (wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
             }, durationY * 1000);
         }
 
         function startFloatingMessagesLoop() {
-            // Spawn a floating message every 3.5 seconds
             setInterval(() => {
                 if (document.body.classList.contains('invitation-opened') && guestMessages.length > 0) {
                     const randomMsg = guestMessages[Math.floor(Math.random() * guestMessages.length)];
@@ -574,46 +769,37 @@
             }, 3500);
         }
 
-        // Initialize fetching
         loadAndFloatMessages();
 
-        // Update character count live
         if (messageInput) {
             messageInput.addEventListener('input', function() {
                 charCount.textContent = this.value.length;
             });
         }
 
-        // Handle form submission
         if (messageForm) {
             messageForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent page reload
+                e.preventDefault(); 
                 
                 const submitBtn = messageForm.querySelector('button[type="submit"]');
                 const originalBtnText = submitBtn.textContent;
                 submitBtn.textContent = 'Sending...';
                 submitBtn.disabled = true;
 
-                // Get form values
                 const name = document.getElementById('guestName').value;
                 const message = document.getElementById('guestMessage').value;
 
-                // IMPORTANT: Your Google Apps Script URL is linked here!
                 const scriptURL = 'https://script.google.com/macros/s/AKfycbzyVN199qkSHafwnGS6vID0eLc3a7lwEUxMTnX1ZpAYdECA2zMYr_DkIJ5hXQUXLXnN_Q/exec';
                 
-                // Create data payload
                 const formData = new FormData();
                 formData.append('Name', name);
                 formData.append('Message', message);
 
-                // Send data to Google Sheet
                 fetch(scriptURL, { method: 'POST', body: formData})
                     .then(response => {
-                        // Hide form and show thank you message
                         messageForm.style.display = 'none';
                         formSuccess.classList.remove('hidden');
                         
-                        // 1. Instant Live Display! Float their message immediately
                         guestMessages.push({ name: name, message: message });
                         spawnMessage(name, message, true);
                     })
